@@ -1,22 +1,15 @@
 import ChangePasswordIcon from "@/assets/account/ChangePasswordIcon";
 import LogoutIcon from "@/assets/account/LogoutIcon";
 import ManageAccountIcon from "@/assets/account/ManageAccount";
-import { setChangePassword } from "@/redux/reducers/extra-slicer";
-import { setClearAllData } from "@/redux/reducers/user-slicer";
-import { AppDispatch, RootState } from "@/redux/store";
 import { Menu } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { MdAccountCircle } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const User = () => {
-  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-  const { signInData } = useSelector((state: RootState) => state.userReducer);
 
   const handleLogout = async () => {
-    dispatch(setClearAllData());
     navigate("/");
     notifications.show({
       color: "blue",
@@ -34,10 +27,8 @@ const User = () => {
             <MdAccountCircle size={35} />
 
             <div className="flex flex-col items-start">
-              <p className="text-sm font-semibold">{signInData?.UserName}</p>
-              <p className="text-xs font-medium capitalize">
-                {signInData?.Role}
-              </p>
+              <p className="text-sm font-semibold">{"Eaysin"}</p>
+              <p className="text-xs font-medium capitalize">{"User"}</p>
             </div>
           </div>
         </Menu.Target>
@@ -45,10 +36,7 @@ const User = () => {
         <Menu.Dropdown>
           <Menu.Item
             leftSection={<ManageAccountIcon />}
-            onClick={() => {
-              navigate("/account");
-              dispatch(setChangePassword(false));
-            }}
+            onClick={() => navigate("/account")}
           >
             Manage Account
           </Menu.Item>
@@ -56,10 +44,7 @@ const User = () => {
 
           <Menu.Item
             leftSection={<ChangePasswordIcon />}
-            onClick={() => {
-              navigate("/account");
-              dispatch(setChangePassword(true));
-            }}
+            onClick={() => navigate("/account")}
           >
             Change Password
           </Menu.Item>

@@ -1,20 +1,8 @@
-import {
-  fetchCreateTimeSheets,
-  fetchGetTimeSheetsCount,
-  fetchGetTimeSheetsDay,
-  fetchGetTimeSheetsMonth,
-  fetchGetTimeSheetsWeek,
-} from "@/redux/reducers/time-sheets-slicer";
-import { RootState } from "@/redux/store";
 import { TimeArray } from "@/types/types";
-import { getMonthNumber } from "@/utils/get-month-number";
 import { Button, FileInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
-import { notifications } from "@mantine/notifications";
 import { IconPlus } from "@tabler/icons-react";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import Tooltip from "../tooltip";
 import FormInput from "../ui/form-elements/input";
 
@@ -22,11 +10,6 @@ interface InputGroup {
   id: string;
   value: [Date | null, Date | null];
   workHours: number;
-}
-
-interface Props {
-  inputGroups: InputGroup[];
-  handleDateChange: (id: string, dateRange: [Date | null, Date | null]) => void;
 }
 
 const currentYear = new Date().getFullYear();
@@ -40,23 +23,11 @@ const NewTimeSheetModal = ({
   type: string;
   data: any;
 }) => {
-  const dispatch = useDispatch();
   const [ipLocation, setIpLocation] = useState<{ ip: string; loc: string }>();
   const [inputGroups, setInputGroups] = useState<
     { id: number; value: [Date | null, Date | null]; workHours: number }[]
   >([{ id: Date.now(), value: [null, null], workHours: 0 }]);
-  const { role, token } = useSelector((state: RootState) => state.userReducer);
-  const host = window.location.host;
-  const subdomain = host.split(".")[0];
-  const portalUrl: string = `${subdomain}.saciahub.com`;
-  const { selectedTimeSheet } = useSelector(
-    (state: RootState) => state.timeSheetReducer
-  ) as {
-    selectedTimeSheet: string | null;
-  };
-  const { uploadMediaData } = useSelector(
-    (state: RootState) => state.userBgvReducer
-  );
+
   const [clientName, setClientName] = useState<string>(data?.ClientName);
   const [projectName, setProjectName] = useState<string>(data?.ProjectName);
   const [notes, setNotes] = useState<string>(data?.Notes);
@@ -97,56 +68,8 @@ const NewTimeSheetModal = ({
     );
   };
 
-  useEffect(() => {
-    axios
-      .get("https://ipinfo.io/")
-      .then((res) => {
-        const { ip, loc } = res.data;
-        setIpLocation({ ip, loc });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  const handleRefetch = () => {
-    if (token && selectedTimeSheet) {
-      dispatch(
-        fetchGetTimeSheetsCount({ year: currentYear, portalUrl, token }) as any
-      );
-      const monthNumber = getMonthNumber(selectedTimeSheet.split(" ")[0]);
-      const year = selectedTimeSheet.split(" ")[1];
-      const week = year + "-" + monthNumber;
-      type === "day"
-        ? dispatch(
-            fetchGetTimeSheetsDay({
-              portalUrl,
-              month: week,
-              token: token as any,
-            }) as any
-          )
-        : type === "week"
-        ? dispatch(
-            fetchGetTimeSheetsWeek({
-              portalUrl,
-              week: week,
-              token: token as any,
-            }) as any
-          )
-        : dispatch(
-            fetchGetTimeSheetsMonth({
-              portalUrl,
-              month: week,
-              token: token as any,
-            }) as any
-          );
-    }
-  };
-
   const handleSubmit = () => {
     if (!ipLocation) return;
-    const sow = "sow";
-    const userManager = "user-manager";
     const time: TimeArray = inputGroups
       .map((group) => {
         const [startDate, endDate] = group.value;
@@ -162,55 +85,6 @@ const NewTimeSheetModal = ({
         return [];
       })
       .reduce((acc, curr) => acc.concat(curr), []);
-
-    const ip = ipLocation.ip;
-    const [lat, long] = ipLocation.loc.split(",");
-    if (selectedTimeSheet && token) {
-      const month = selectedTimeSheet.split(" ")[0];
-      const monthNumber = getMonthNumber(month);
-      dispatch(
-        fetchCreateTimeSheets({
-          portalUrl,
-          clientName,
-          projectName,
-          sow,
-          userManager,
-          task,
-          month: monthNumber,
-          attachments: uploadMediaData?.attachment,
-          time,
-          ip,
-          lat,
-          long,
-          notes,
-          token,
-        }) as any
-      )
-        .unwrap()
-        .then((data: any) => {
-          if (data.status === 201) {
-            notifications.show({
-              color: "blue",
-              title: "Success",
-              message: "Timesheet created successfully",
-              autoClose: 4000,
-            });
-            close();
-            handleRefetch();
-          } else {
-            console.error("Timesheet creation failed:", data);
-          }
-        })
-        .catch((error: any) => {
-          console.error("Error creating timesheet:", error);
-          notifications.show({
-            color: "red",
-            title: "Error",
-            message: error.message,
-            autoClose: 4000,
-          });
-        });
-    }
   };
 
   const getCurrentWeekRange = () => {

@@ -1,10 +1,10 @@
 import FilterIcon from "@/assets/filter/FilterIcon";
 import ResetIcon from "@/assets/filter/ResetIcon";
 import { useState } from "react";
-import CompletedButton from "./Buttons/CompletedButton";
-import FailedButton from "./Buttons/FailedButton";
-import FilterSelect from "./Buttons/FilterSelect";
-import PendingButton from "./Buttons/PendingButton";
+import CompletedButton from "./buttons/completed-button";
+import FailedButton from "./buttons/failed-button";
+import FilterSelect from "./buttons/filter-select";
+import PendingButton from "./buttons/pending-button";
 
 type ButtonType = "completed" | "pending" | "failed";
 

@@ -1,4 +1,4 @@
-import { Select } from "@mantine/core";
+import { Select as MantineSelect } from "@mantine/core";
 
 // Select input props
 type Props = {
@@ -16,7 +16,7 @@ type Props = {
 };
 
 // Select input component
-function SelectInput({
+function Select({
   value,
   onChange,
   name,
@@ -30,7 +30,7 @@ function SelectInput({
   id,
 }: Props) {
   return (
-    <Select
+    <MantineSelect
       label={label}
       placeholder={placeholder || `Select ${label}`}
       value={value}
@@ -52,4 +52,4 @@ function SelectInput({
   );
 }
 
-export default SelectInput;
+export default Select;

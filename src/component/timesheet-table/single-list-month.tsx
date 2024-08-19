@@ -1,20 +1,12 @@
 import CalenderType1 from "@/assets/Icons/CalenderType1";
 import PDFType1 from "@/assets/Icons/PDFType1";
-import { TimeSheetDataWeek } from "@/Pages/TimeSheetsView";
-import {
-  fetchDeleteTimeSheets,
-  fetchGetTimeSheetsMonth,
-} from "@/redux/reducers/time-sheets-slicer";
-import { fetchGetMediaUploaded } from "@/redux/reducers/user-bgv-slicer";
-import { AppDispatch, RootState } from "@/redux/store";
+import { TimeSheetDataWeek } from "@/pages/time-sheets-view";
 import { Button, Checkbox, Menu, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { notifications } from "@mantine/notifications";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
 import { TbTrash } from "react-icons/tb";
-import { useDispatch, useSelector } from "react-redux";
 import NewTimeSheetModal from "../time-sheets/new-time-sheet-modal";
 import DocumentsPreviewModal from "./documents-preview-modal";
 interface SingleListProps {
@@ -35,32 +27,18 @@ const SingleListMonth: React.FC<SingleListProps> = ({
   const [openedM, { open: openM, close: closeM }] = useDisclosure(false);
   const startDate = weekKey?.split(" to ")[0];
   const endDate = weekKey?.split(" to ")[1];
-  const dispatch: AppDispatch = useDispatch();
-  const { token } = useSelector((state: RootState) => state.userReducer);
-  const host = window.location.host;
-  const subdomain = host.split(".")[0];
-  const portalUrl = `${subdomain}.saciahub.com`;
+
   const strArr =
     id &&
     id.map(function (e) {
       return e.toString();
     });
 
-  const { filesMediaData }: { filesMediaData: any } = useSelector(
-    (state: RootState) => state.userBgvReducer
-  );
   const [fileUrl, setFileUrl] = useState<string>("");
   const [fileType, setFileType] = useState<string>("");
 
   const fetchFile = (file: string) => {
     open();
-    dispatch(
-      fetchGetMediaUploaded({
-        portalUrl,
-        file,
-        token: token || "",
-      })
-    );
 
     const extension = file.split(".").pop();
     if (extension) {
@@ -68,16 +46,6 @@ const SingleListMonth: React.FC<SingleListProps> = ({
       setFileType(extension);
     }
   };
-
-  useEffect(() => {
-    if (filesMediaData && filesMediaData instanceof Blob) {
-      const url = URL.createObjectURL(filesMediaData);
-      setFileUrl(url);
-      return () => {
-        URL.revokeObjectURL(url);
-      };
-    }
-  }, [filesMediaData]);
 
   return (
     <div className="flex items-center py-3 bg-white mt-2 rounded-md">
@@ -217,32 +185,7 @@ const SingleListMonth: React.FC<SingleListProps> = ({
                 Edit
               </Menu.Item>
             )}
-            <Menu.Item
-              leftSection={<TbTrash color="red" />}
-              onClick={() => {
-                dispatch(
-                  fetchDeleteTimeSheets({
-                    portalUrl,
-                    token,
-                    timesheetID: strArr,
-                  })
-                ).then(() => {
-                  notifications.show({
-                    color: "blue",
-                    title: "Success",
-                    message: "Timesheet deleted successfully",
-                    autoClose: 4000,
-                  });
-                  dispatch(
-                    fetchGetTimeSheetsMonth({
-                      portalUrl,
-                      month: week,
-                      token: token as any,
-                    }) as any
-                  );
-                });
-              }}
-            >
+            <Menu.Item leftSection={<TbTrash color="red" />} onClick={() => {}}>
               <span className="text-red-500">Delete</span>
             </Menu.Item>
           </Menu.Dropdown>

@@ -1,8 +1,6 @@
 // src/components/ProtectedRoute.tsx
+import { getUserRole, Role } from "@/utils/get-role";
 import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -15,12 +13,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   allowedRoles,
   fallback,
 }) => {
-  const location = useLocation();
-  const { role, token } = useSelector((state: RootState) => state.userReducer);
-
-  if (!token) {
-    return <Navigate to={"/"} state={{ from: location }} />;
-  }
+  const role: Role = getUserRole();
 
   if (!allowedRoles.includes(role || "")) {
     return fallback;

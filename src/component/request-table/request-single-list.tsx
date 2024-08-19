@@ -1,5 +1,5 @@
 import CalenderType1 from "@/assets/Icons/CalenderType1";
-import { RequestType } from "@/Types/requestType";
+import { RequestType } from "@/types/requestType";
 import { convertUTCToLocalTime } from "@/utils/utcToLocalTime";
 import { Button, Checkbox, Menu, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";

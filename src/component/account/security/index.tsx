@@ -1,10 +1,6 @@
-import { updatePassword } from "@/redux/reducers/user-slicer";
-import { AppDispatch } from "@/redux/store";
 import { getPortalInfo } from "@/utils/get-protal-info";
 import { Button, PasswordInput, Switch } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useDispatch } from "react-redux";
 import { validateForm } from "./validation-form";
 
 export interface FormState {
@@ -18,7 +14,6 @@ const initialState = {
 };
 
 const Security = () => {
-  const dispatch: AppDispatch = useDispatch();
   const [formState, setFormState] = useState<FormState>({ ...initialState });
   const [errors, setErrors] = useState<FormState>({ ...initialState });
 
@@ -40,36 +35,6 @@ const Security = () => {
     if (!isValid) {
       return;
     }
-
-    dispatch(
-      updatePassword({
-        Company_Portal_Url: portalUrl,
-        old_password: formState.currentPassword,
-        new_password: formState.newPassword,
-      })
-    )
-      .unwrap()
-      .then((data) => {
-        if (data.status === 200) {
-          notifications.show({
-            color: "blue",
-            title: "Success",
-            message: "Password updated successfully",
-            autoClose: 4000,
-          });
-          setFormState({ ...initialState });
-        } else {
-          console.error("Login failed:", data);
-        }
-      })
-      .catch((error) => {
-        notifications.show({
-          color: "red",
-          title: "Error",
-          message: typeof error === "string" ? error : "Something went wrong",
-          autoClose: 4000,
-        });
-      });
   };
 
   return (

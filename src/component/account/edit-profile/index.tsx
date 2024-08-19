@@ -1,7 +1,7 @@
 import ProfileUploadButton from "@/component/profile-upload-display/profile-upload";
 import FormInput from "@/component/ui/form-elements/input";
 import { PasswordInput } from "@mantine/core";
-import DisplayProfile from "./DisplayProfile";
+import DisplayProfile from "./display-profile";
 
 const EditProfile = ({ signInData }: { signInData: any }) => {
   return (

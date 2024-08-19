@@ -1,11 +1,10 @@
-import { RootState } from "@/redux/store";
 import {
   URLApplications,
   URLDashboard,
   URLRequests,
   URLTimeSheets,
 } from "@/routes/router-link";
-import { useSelector } from "react-redux";
+import { getUserRole, Role } from "@/utils/get-role";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import User from "./user";
@@ -16,7 +15,7 @@ interface NavLink {
   path?: string;
 }
 const Navbar = () => {
-  const { role, token } = useSelector((state: RootState) => state.userReducer);
+  const role: Role = getUserRole();
 
   const location = useLocation();
   const navLinks: NavLink[] = [
@@ -28,11 +27,8 @@ const Navbar = () => {
     { label: "Requests", path: URLRequests() },
   ];
 
-  if (role === "Admin") {
-    navLinks.push(
-      { label: "Applications", path: URLApplications() }
-      // { label: "Organization", path: "/organization" }
-    );
+  if (role === "admin") {
+    navLinks.push({ label: "Applications", path: URLApplications() });
   }
 
   const isActive = (path?: string) => {

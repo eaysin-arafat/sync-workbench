@@ -1,13 +1,6 @@
-import {
-  fetchCreateUserRequest,
-  fetchUpdateUserRequest,
-} from "@/redux/reducers/user-requests-slicer";
-import { AppDispatch } from "@/redux/store";
-import { RequestObjType, requestType, RequestType } from "@/types/requestType";
+import { RequestObjType, RequestType } from "@/types/requestType";
 import { getPortalInfo } from "@/utils/get-protal-info";
-import { notifications } from "@mantine/notifications";
 import React, { FormEvent, useState } from "react";
-import { useDispatch } from "react-redux";
 import { RequestListType } from "../request-table/request-single-list";
 
 type FormState = {
@@ -62,7 +55,6 @@ const useRequestViewModal = ({
   data?: RequestListType | null;
 }) => {
   const isEdit = !!data;
-  const dispatch: AppDispatch = useDispatch();
   const { previousData, previousDate } = getPreviousData(data, type, isEdit);
   const formStateData: FormState = isEdit ? previousData : initialState;
   const { portalUrl } = getPortalInfo();
@@ -84,94 +76,6 @@ const useRequestViewModal = ({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
-    const startDate = rangeValue[0] ? rangeValue[0].toISOString() : "";
-    const endDate = rangeValue[1] ? rangeValue[1].toISOString() : "";
-
-    isEdit
-      ? dispatch(
-          fetchUpdateUserRequest({
-            ClientName: "",
-            Company_Portal_Url: portalUrl,
-            endDate: [endDate],
-            Hours: [],
-            ProjectName: "",
-            RequestAttachmentURL: "",
-            RequestDescription: formState?.requestDescription || "",
-            RequestPriority: formState?.requestPriority || "",
-            RequestType: requestType[type as keyof RequestObjType],
-            startDate: [startDate],
-            Task: "",
-            Type: formState?.type,
-            ID: data?.ID,
-          })
-        )
-          .unwrap()
-          .then((data) => {
-            if (data.status === 200) {
-              notifications.show({
-                color: "blue",
-                title: "Success",
-                message: "Request updated successfully",
-                autoClose: 4000,
-              });
-
-              close();
-              setFormState({ ...initialState });
-            } else {
-              console.error("Request created failed:", data);
-            }
-          })
-          .catch((error) => {
-            notifications.show({
-              color: "red",
-              title: "Error",
-              message:
-                typeof error === "string" ? error : "Something went wrong",
-              autoClose: 4000,
-            });
-          })
-      : dispatch(
-          fetchCreateUserRequest({
-            ClientName: "",
-            Company_Portal_Url: portalUrl,
-            endDate: [endDate],
-            startDate: [startDate],
-            Hours: [0],
-            ProjectName: "",
-            RequestAttachmentURL: "",
-            RequestDescription: formState.requestDescription,
-            RequestPriority: formState.requestPriority,
-            RequestType: requestType[type as keyof RequestObjType],
-            Task: "",
-            Type: formState.type,
-          })
-        )
-          .unwrap()
-          .then((data) => {
-            if (data.status === 201) {
-              notifications.show({
-                color: "blue",
-                title: "Success",
-                message: "Request created successfully",
-                autoClose: 4000,
-              });
-
-              close();
-              setFormState({ ...initialState });
-            } else {
-              console.error("Request created failed:", data);
-            }
-          })
-          .catch((error) => {
-            notifications.show({
-              color: "red",
-              title: "Error",
-              message:
-                typeof error === "string" ? error : "Something went wrong",
-              autoClose: 4000,
-            });
-          });
   };
 
   const withoutTimeOffType =

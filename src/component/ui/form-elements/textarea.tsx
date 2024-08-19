@@ -1,4 +1,4 @@
-import { Textarea } from "@mantine/core";
+import { Textarea as MantineTextarea } from "@mantine/core";
 
 type Props = {
   value?: string | number;
@@ -15,7 +15,7 @@ type Props = {
 };
 
 // Textarea input component
-function TextareaInput({
+function Textarea({
   value,
   onChange,
   name,
@@ -29,7 +29,7 @@ function TextareaInput({
   width,
 }: Props) {
   return (
-    <Textarea
+    <MantineTextarea
       label={label}
       placeholder={placeholder ? placeholder : `Type ${label}`}
       id={id}
@@ -44,4 +44,4 @@ function TextareaInput({
   );
 }
 
-export default TextareaInput;
+export default Textarea;

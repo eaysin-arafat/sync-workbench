@@ -1,11 +1,8 @@
 import TimeSheetCard from "@/component/time-sheets/time-sheet-card";
-import { fetchGetTimeSheetsCount } from "@/redux/reducers/time-sheets-slicer";
-import { AppDispatch, RootState } from "@/redux/store";
 import { rem } from "@mantine/core";
 import { YearPickerInput } from "@mantine/dates";
 import { IconCalendar } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 export interface timesheetCountDataProps {
   month: string;
@@ -14,33 +11,10 @@ export interface timesheetCountDataProps {
 
 const TimeSheets = () => {
   const [value, setValue] = useState<Date | null>(new Date());
-  const dispatch: AppDispatch = useDispatch();
-  const { token } = useSelector((state: RootState) => state.userReducer);
-  const { timeSheetCountData } = useSelector(
-    (state: RootState) => state.timeSheetReducer
-  ) as { timeSheetCountData: timesheetCountDataProps[] | null };
-  const host = window.location.host;
-  const subdomain = host.split(".")[0];
-  const portalUrl = `${subdomain}.saciahub.com`;
+
   const icon = (
     <IconCalendar style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
   );
-
-  const currentMonthName = new Date().toLocaleString("default", {
-    month: "long",
-  });
-
-  useEffect(() => {
-    dispatch(
-      fetchGetTimeSheetsCount({
-        year: value?.getFullYear(),
-        portalUrl,
-        token: token as any,
-      }) as any
-    ).then((result: any) => {
-      console.log("API call result:", result);
-    });
-  }, [portalUrl, value]);
 
   return (
     <div className="">
@@ -56,16 +30,15 @@ const TimeSheets = () => {
           maxDate={new Date()}
         />
       </div>
-      <div className="grid grid-cols-4 gap-10 justify-center mt-10">
-        {timeSheetCountData &&
-          timeSheetCountData?.map((item, index) => (
-            <TimeSheetCard
-              date={item.month}
-              data={item.count}
-              key={index}
-              newDisabled={item.month.split(" ")[0] !== currentMonthName}
-            />
-          ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10 justify-center mt-10">
+        {[2, 5, 8, 8, 10, 8, 1]?.map((item, index) => (
+          <TimeSheetCard
+            date={"January"}
+            data={5}
+            key={index}
+            newDisabled={false}
+          />
+        ))}
       </div>
     </div>
   );

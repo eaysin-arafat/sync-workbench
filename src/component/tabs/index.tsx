@@ -1,8 +1,6 @@
 import { Tabs } from "@mantine/core";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import styles from "./MantineTab.module.css";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 
 type TabComponent = {
   id: string;
@@ -20,19 +18,7 @@ export type TabContentType = {
 };
 
 const MantineTab = ({ tabsContent }: { tabsContent: TabContentType }) => {
-  const { isChangePassword } = useSelector(
-    (state: RootState) => state.extraReducer
-  );
-
   const [activeTab, setActiveTab] = useState(tabsContent.components[0].id);
-
-  useEffect(() => {
-    if (isChangePassword) {
-      setActiveTab(tabsContent.components[1].id);
-    } else {
-      setActiveTab(tabsContent.components[0].id);
-    }
-  }, [isChangePassword, tabsContent.components]);
 
   return (
     <Tabs

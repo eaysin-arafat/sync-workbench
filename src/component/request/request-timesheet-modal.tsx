@@ -1,12 +1,9 @@
-import { fetchCreateUserRequest } from "@/redux/reducers/user-requests-slicer";
-import { RootState } from "@/redux/store";
 import { TimeArray } from "@/types/types";
+import { getUserRole, Role } from "@/utils/get-role";
 import { Button, FileInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
-import { notifications } from "@mantine/notifications";
 import { IconPlus } from "@tabler/icons-react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Tooltip from "../tooltip";
 import FormInput from "../ui/form-elements/input";
 
@@ -46,21 +43,12 @@ const RequestViewTimeSheetModal = ({
   data: TimeSheetData;
 }) => {
   const isEdit = !!data;
-  console.log("data", data?.RequestDetails?.Client);
-  console.log("isEdit", isEdit);
+  const role: Role = getUserRole();
 
-  const dispatch = useDispatch();
   const [inputGroups, setInputGroups] = useState<
     { id: number; value: [Date | null, Date | null]; workHours: number }[]
   >([{ id: Date.now(), value: [null, null], workHours: 0 }]);
-  const { role } = useSelector((state: RootState) => state.userReducer);
-  const host = window.location.host;
-  const subdomain = host.split(".")[0];
-  const portalUrl: string = `${subdomain}.saciahub.com`;
 
-  const { uploadMediaData } = useSelector(
-    (state: RootState) => state.userBgvReducer
-  );
   const [clientName, setClientName] = useState<string>(
     isEdit ? data?.RequestDetails?.Client : ""
   );
@@ -134,46 +122,6 @@ const RequestViewTimeSheetModal = ({
         return [];
       })
       .reduce((acc, curr) => acc.concat(curr), []);
-
-    dispatch(
-      fetchCreateUserRequest({
-        Company_Portal_Url: portalUrl,
-        ClientName: clientName,
-        ProjectName: projectName,
-        Task: task,
-        RequestAttachmentURL: uploadMediaData?.attachment,
-        endDate: time?.map((item) => item?.EndDate),
-        Hours: time?.map((item) => item?.HoursWorked),
-        RequestDescription: "",
-        RequestPriority: "",
-        RequestType: "TimeSheet",
-        startDate: time?.map((item) => item?.StartDate),
-        Type: "",
-      }) as any
-    )
-      .unwrap()
-      .then((data: any) => {
-        if (data.status === 201) {
-          notifications.show({
-            color: "blue",
-            title: "Success",
-            message: "Timesheet created successfully",
-            autoClose: 4000,
-          });
-          close();
-        } else {
-          console.error("Timesheet creation failed:", data);
-        }
-      })
-      .catch((error: any) => {
-        console.error("Error creating timesheet:", error);
-        notifications.show({
-          color: "red",
-          title: "Error",
-          message: error.message,
-          autoClose: 4000,
-        });
-      });
   };
 
   const getCurrentWeekRange = () => {

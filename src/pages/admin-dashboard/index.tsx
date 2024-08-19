@@ -5,8 +5,8 @@ import emailVerified from "../../assets/application-icon/email-verified.png";
 import pending from "../../assets/application-icon/pending.png";
 import total from "../../assets/application-icon/total.png";
 
-import TableBody from "@/component/company-dashboard/table-body";
-import TableHeader from "@/component/company-dashboard/table-header";
+import TableBody from "@/component/admin-dashboard/table-body";
+import TableHeader from "@/component/admin-dashboard/table-header";
 import MainCard from "@/component/ui/card";
 import { URLApplications } from "@/routes/router-link";
 import ItemsCard from "../../component/dashboard/user-card";

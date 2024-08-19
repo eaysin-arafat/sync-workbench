@@ -2,19 +2,13 @@ import CalenderType1 from "@/assets/Icons/CalenderType1";
 import PDFType1 from "@/assets/Icons/PDFType1";
 import NewTimeSheetModal from "@/component/time-sheets/new-time-sheet-modal";
 import DocumentsPreviewModal from "@/component/timesheet-table/documents-preview-modal";
-
-import { fetchDeleteTimeSheets } from "@/redux/reducers/time-sheets-slicer";
-import { fetchGetMediaUploaded } from "@/redux/reducers/user-bgv-slicer";
-import { AppDispatch, RootState } from "@/redux/store";
 import { convertUTCToLocalTime } from "@/utils/utcToLocalTime";
 import { Button, Menu, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { notifications } from "@mantine/notifications";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
 import { TbTrash } from "react-icons/tb";
-import { useDispatch, useSelector } from "react-redux";
 
 const SingleTimesheetDay = ({
   data,
@@ -25,27 +19,11 @@ const SingleTimesheetDay = ({
 }) => {
   const [opened, { open, close }] = useDisclosure(false);
   const [openedM, { open: openM, close: closeM }] = useDisclosure(false);
-  const dispatch: AppDispatch = useDispatch();
-  const { token } = useSelector((state: RootState) => state.userReducer);
-  const host = window.location.host;
-  const subdomain = host.split(".")[0];
-  const portalUrl = `${subdomain}.saciahub.com`;
-
-  const { filesMediaData }: { filesMediaData: any } = useSelector(
-    (state: RootState) => state.userBgvReducer
-  );
   const [fileUrl, setFileUrl] = useState<string>("");
   const [fileType, setFileType] = useState<string>("");
 
   const fetchFile = (file: string) => {
     open();
-    dispatch(
-      fetchGetMediaUploaded({
-        portalUrl,
-        file,
-        token: token || "",
-      })
-    );
 
     const extension = file.split(".").pop();
     if (extension) {
@@ -54,15 +32,6 @@ const SingleTimesheetDay = ({
     }
   };
 
-  useEffect(() => {
-    if (filesMediaData && filesMediaData instanceof Blob) {
-      const url = URL.createObjectURL(filesMediaData);
-      setFileUrl(url);
-      return () => {
-        URL.revokeObjectURL(url);
-      };
-    }
-  }, [filesMediaData]);
   return (
     <div className="flex items-center py-3 bg-white mt-2 rounded-md border">
       {/* <div className="w-[5%] flex justify-start ml-4">
@@ -176,26 +145,7 @@ const SingleTimesheetDay = ({
                 Edit
               </Menu.Item>
             )}
-            <Menu.Item
-              leftSection={<TbTrash color="red" />}
-              onClick={() => {
-                dispatch(
-                  fetchDeleteTimeSheets({
-                    portalUrl,
-                    token,
-                    timesheetID: [data.ID.toString()],
-                  })
-                ).then(() => {
-                  notifications.show({
-                    color: "blue",
-                    title: "Success",
-                    message: "Timesheet deleted successfully",
-                    autoClose: 4000,
-                  });
-                  reFetch();
-                });
-              }}
-            >
+            <Menu.Item leftSection={<TbTrash color="red" />} onClick={() => {}}>
               <span className="text-red-500">Delete</span>
             </Menu.Item>
           </Menu.Dropdown>

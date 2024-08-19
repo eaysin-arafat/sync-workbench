@@ -1,12 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {
-  fetchCreateUserBGVForm,
-  fetchUpdateUserBGVForm,
-  fetchUserBGVData,
-} from "@/redux/reducers/user-bgv-slicer";
-import { AppDispatch, RootState } from "@/redux/store";
-
 import ApplicationSubmit from "@/component/user-bgv/forms/application-submit";
 import EducationDetails, {
   EducationalDetailsType,
@@ -27,14 +20,12 @@ import { URLDashboard } from "@/routes/router-link";
 import { getPortalInfo } from "@/utils/get-protal-info";
 import { Button } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { TiTick } from "react-icons/ti";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { getInitialState } from "./helper/constant";
-import { determineCurrentStep } from "./helper/determineCurrentStep";
 import { validateStep } from "./helper/validateStep";
 
 export type UserBgvFormDataType = {
@@ -52,15 +43,12 @@ type SectionData = {
 
 const UserBGV = () => {
   const { portalUrl } = getPortalInfo();
-  const { userBgvReducer } = useSelector((state: RootState) => state);
   const navigate = useNavigate();
-  const dispatch: AppDispatch = useDispatch();
-  const { uploadMediaData, userBGVData, isLoading } = userBgvReducer;
 
   const [currentStep, setCurrentStep] = useState(1);
   const [complete, setComplete] = useState(false);
   const [formData, setFormData] = useState<UserBgvFormDataType>(
-    getInitialState(portalUrl, userBGVData)
+    getInitialState(portalUrl, {})
   );
   const [isStepValid, setIsStepValid] = useState(false);
 
@@ -163,8 +151,9 @@ const UserBGV = () => {
     <EmploymentDetails formData={formData} setFormData={setFormData} />,
     <ApplicationSubmit />,
   ];
+  const isSubmitSuccessful = true;
 
-  const handleSubmit = async (): Promise<boolean> => {
+  const handleSubmit = async () => {
     const updatedFormData = {
       ...formData.PersonalDetails,
       ...formData.IdentityDetails,
@@ -179,33 +168,16 @@ const UserBGV = () => {
       Date_of_Birth: formData.PersonalDetails.Date_of_Birth,
       Marital_Status: formData.PersonalDetails.Marital_Status,
       Company_Portal_Url: formData.Company_Portal_Url,
-      Passport_Size_Photo: uploadMediaData.Passport_Size_Photo,
-      Passport_Image: uploadMediaData.Passport_Image,
-      PAN_Image: uploadMediaData.PAN_Image,
-      Aadhar_Image: uploadMediaData.Aadhar_Image,
+      Passport_Size_Photo: "uploadMediaData.Passport_Size_Photo",
+      Passport_Image: "uploadMediaData.Passport_Image",
+      PAN_Image: "uploadMediaData.PAN_Image",
+      Aadhar_Image: "uploadMediaData.Aadhar_Image",
     };
 
     delete updatedFormData.Re_enter_Aadhar_Number;
     delete updatedFormData.Re_enter_PAN_Number;
     delete updatedFormData.Re_enter_Passport_Number;
     delete updatedFormData.Re_enter_UAN_Number;
-
-    try {
-      if (currentStep === 1 && Object.keys(userBGVData).length === 0) {
-        await dispatch(fetchCreateUserBGVForm(updatedFormData)).unwrap();
-      } else {
-        await dispatch(
-          fetchUpdateUserBGVForm({
-            Company_Portal_Url: portalUrl,
-            formData: updatedFormData,
-          })
-        ).unwrap();
-      }
-      return true;
-    } catch (error) {
-      console.error("API call failed", error);
-      return false;
-    }
   };
   const { errors, isValid } = validateStep(currentStep, steps, optionalFields);
 
@@ -223,7 +195,6 @@ const UserBGV = () => {
       setComplete(true);
       navigate(URLDashboard());
     } else {
-      const isSubmitSuccessful = await handleSubmit();
       if (isSubmitSuccessful) {
         setCurrentStep((prev) => prev + 1);
       } else {
@@ -236,34 +207,6 @@ const UserBGV = () => {
       }
     }
   };
-
-  useEffect(() => {
-    dispatch(fetchUserBGVData({ Company_Portal_Url: portalUrl }));
-  }, []);
-
-  useEffect(() => {
-    setIsStepValid(isValid);
-  }, [currentStep, formData]);
-
-  useEffect(() => {
-    setFormData((prev) => ({
-      ...prev,
-      PersonalDetails: {
-        ...prev.PersonalDetails,
-        Passport_Size_Photo: uploadMediaData?.Passport_Size_Photo,
-      },
-      IdentityDetails: {
-        ...prev.IdentityDetails,
-        PAN_Image: uploadMediaData?.PAN_Image,
-        Aadhar_Image: uploadMediaData?.Aadhar_Image,
-        Passport_Image: uploadMediaData?.Passport_Image,
-      },
-    }));
-  }, [uploadMediaData]);
-
-  useEffect(() => {
-    setCurrentStep(determineCurrentStep(userBGVData));
-  }, [userBGVData]);
 
   return (
     <div className="flex flex-col p-2 min-h-screen px-[10%] pb-10 relative">
@@ -337,7 +280,7 @@ const UserBGV = () => {
             <div>{steps[currentStep - 1]}</div>
 
             <Button
-              loading={isLoading}
+              loading={false}
               loaderProps={{ type: "dots" }}
               className={`btn !bg-[#1E1E1E] !w-full !text-white !py-2.5 !rounded-lg !mx-auto !mt-[18px] ${
                 !isStepValid && "!opacity-80 !cursor-not-allowed"

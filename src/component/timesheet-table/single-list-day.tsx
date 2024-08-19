@@ -1,26 +1,19 @@
 import CalenderType1 from "@/assets/Icons/CalenderType1";
 import PDFType1 from "@/assets/Icons/PDFType1";
-import { TimeSheetDataDay } from "@/Pages/TimeSheetsView";
-import {
-  fetchDeleteTimeSheets,
-  fetchGetTimeSheetsDay,
-} from "@/redux/reducers/time-sheets-slicer";
-import { fetchGetMediaUploaded } from "@/redux/reducers/user-bgv-slicer";
-import { AppDispatch, RootState } from "@/redux/store";
+
+import { TimeSheetDataDay } from "@/pages/time-sheets-view";
 import { convertUTCToLocalTime } from "@/utils/utcToLocalTime";
 import { Button, Checkbox, Menu, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { notifications } from "@mantine/notifications";
 import { useEffect, useState } from "react";
 import { BiEdit } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
 import { TbTrash } from "react-icons/tb";
-import { useDispatch, useSelector } from "react-redux";
 import NewTimeSheetModal from "../time-sheets/new-time-sheet-modal";
 import DocumentsPreviewModal from "./documents-preview-modal";
 interface SingleListProps {
-  data: TimeSheetDataDay;
-  type: string;
+  data?: TimeSheetDataDay;
+  type?: string;
   id?: number;
   week?: string | number;
 }
@@ -29,32 +22,17 @@ const SingleListDay: React.FC<SingleListProps> = ({
   type = "day",
   data,
   id,
-  week,
 }: SingleListProps) => {
   const [opened, { open, close }] = useDisclosure(false);
   const [openedM, { open: openM, close: closeM }] = useDisclosure(false);
-  const dispatch: AppDispatch = useDispatch();
   const [ids, setIds] = useState<string[]>([]);
-  const { token } = useSelector((state: RootState) => state.userReducer);
-  const { filesMediaData }: { filesMediaData: any } = useSelector(
-    (state: RootState) => state.userBgvReducer
-  );
+
   const [selectedData, setSelectedData] = useState<TimeSheetDataDay>();
   const [fileUrl, setFileUrl] = useState<string>("");
   const [fileType, setFileType] = useState<string>("");
-  const host = window.location.host;
-  const subdomain = host.split(".")[0];
-  const portalUrl = `${subdomain}.saciahub.com`;
 
   const fetchFile = (file: string) => {
     open();
-    dispatch(
-      fetchGetMediaUploaded({
-        portalUrl,
-        file,
-        token: token || "",
-      })
-    );
 
     const extension = file.split(".").pop()?.toLowerCase();
     let mimeType = "";
@@ -81,16 +59,6 @@ const SingleListDay: React.FC<SingleListProps> = ({
   };
 
   useEffect(() => {
-    if (filesMediaData && filesMediaData instanceof Blob) {
-      const url = URL.createObjectURL(filesMediaData);
-      setFileUrl(url);
-      return () => {
-        URL.revokeObjectURL(url);
-      };
-    }
-  }, [filesMediaData]);
-
-  useEffect(() => {
     if (data) {
       if (id) {
         const idAsStringArray: string[] = [id.toString()];
@@ -109,7 +77,7 @@ const SingleListDay: React.FC<SingleListProps> = ({
       {type === "day" ? (
         <div className="flex gap-2 items-center w-[30%] justify-center text-sm font-semibold">
           <CalenderType1 />
-          <p>{convertUTCToLocalTime(data?.Date)}</p>
+          <p>{convertUTCToLocalTime(new Date().toLocaleDateString())}</p>
         </div>
       ) : type === "month" ? (
         <>
@@ -141,9 +109,7 @@ const SingleListDay: React.FC<SingleListProps> = ({
       <div className="w-[10%] flex justify-center">
         <div
           className="flex gap-1 items-center justify-center border-gray-300 border-2 rounded-lg px-1 cursor-pointer"
-          onClick={() => {
-            fetchFile(data?.TimesheetAttachmentURL);
-          }}
+          onClick={() => {}}
         >
           <PDFType1 />
           <span className="text-gray-500">
@@ -238,32 +204,7 @@ const SingleListDay: React.FC<SingleListProps> = ({
                 Edit
               </Menu.Item>
             )}
-            <Menu.Item
-              leftSection={<TbTrash color="red" />}
-              onClick={() => {
-                dispatch(
-                  fetchDeleteTimeSheets({
-                    portalUrl,
-                    token,
-                    timesheetID: ids,
-                  })
-                ).then(() => {
-                  notifications.show({
-                    color: "blue",
-                    title: "Success",
-                    message: "Timesheet deleted successfully",
-                    autoClose: 4000,
-                  });
-                  dispatch(
-                    fetchGetTimeSheetsDay({
-                      portalUrl,
-                      month: week,
-                      token: token as any,
-                    }) as any
-                  );
-                });
-              }}
-            >
+            <Menu.Item leftSection={<TbTrash color="red" />} onClick={() => {}}>
               <span className="text-red-500">Delete</span>
             </Menu.Item>
           </Menu.Dropdown>

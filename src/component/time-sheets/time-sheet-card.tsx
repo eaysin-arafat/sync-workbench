@@ -1,6 +1,3 @@
-import { setSelectedTimeSheet } from "@/redux/reducers/time-sheets-slicer";
-import { RootState } from "@/redux/store";
-
 import {
   URLTimeSheetsTemplateTwo,
   URLTimeSheetsView,
@@ -9,7 +6,6 @@ import { Button, Menu, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { BsThreeDots } from "react-icons/bs";
 import { FaCalendarDays } from "react-icons/fa6";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import NewTimeSheetModal from "./new-time-sheet-modal";
 
@@ -26,13 +22,12 @@ const TimeSheetCard = ({
   bottomLabel,
   newDisabled,
 }: TimeSheetCardProps) => {
-  const { signInData } = useSelector((state: RootState) => state.userReducer);
   const [opened, { open, close }] = useDisclosure(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const tamplage = "template2";
 
   return (
-    <div className="bg-white min-w-[275px] rounded-[5px] p-8 flex flex-col justify-center items-center">
+    <div className="bg-white border rounded-[5px] p-8 flex flex-col justify-center items-center">
       <div className="flex items-center justify-between w-full mb-6">
         <div className="flex gap-2 items-center">
           <p className="font-semibold">{date}</p>
@@ -59,18 +54,13 @@ const TimeSheetCard = ({
           >
             {newDisabled ? (
               <>
-                <Menu.Item
-                  onClick={() => {
-                    navigate(URLTimeSheetsView());
-                    dispatch(setSelectedTimeSheet(date));
-                  }}
-                >
+                <Menu.Item onClick={() => navigate(URLTimeSheetsView())}>
                   View Timesheet
                 </Menu.Item>
               </>
             ) : (
               <>
-                {signInData?.TimeSheet_Template === "template2" ? (
+                {tamplage === "template2" ? (
                   <Menu.Item
                     onClick={() => {
                       navigate(URLTimeSheetsTemplateTwo());
@@ -79,21 +69,9 @@ const TimeSheetCard = ({
                     New Timesheet
                   </Menu.Item>
                 ) : (
-                  <Menu.Item
-                    onClick={() => {
-                      open();
-                      dispatch(setSelectedTimeSheet(date));
-                    }}
-                  >
-                    New Timesheet
-                  </Menu.Item>
+                  <Menu.Item onClick={() => open()}>New Timesheet</Menu.Item>
                 )}
-                <Menu.Item
-                  onClick={() => {
-                    navigate(URLTimeSheetsView());
-                    dispatch(setSelectedTimeSheet(date));
-                  }}
-                >
+                <Menu.Item onClick={() => navigate(URLTimeSheetsView())}>
                   View Timesheet
                 </Menu.Item>
               </>

@@ -57,11 +57,11 @@ const Requests = () => {
   const handleViewType = (type: RequestType) => setViewType(type);
 
   return (
-    <div className="grid grid-cols-4 gap-10 mt-20">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10 justify-center mt-20">
       {requestData.map((item) => {
         return (
           <div
-            className="bg-white shadow-sm w-[275px] rounded-md p-8 flex flex-col justify-center items-center"
+            className="bg-white border shadow-sm rounded-md p-8 flex flex-col justify-center items-center"
             key={item.id}
           >
             <div className="flex items-center justify-between w-full mb-6">

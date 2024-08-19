@@ -2,10 +2,10 @@ import NewTimeSheetTemplateTwo from "@/component/time-sheets/new-timesheet-templ
 import RootLayout from "@/layout/RootLayout";
 import Account from "@/pages/account";
 import AddUsers from "@/pages/add-users";
+import CompanyDashboard from "@/pages/admin-dashboard";
+import CompanySignUp from "@/pages/admin-signup";
 import Applications from "@/pages/applications";
 import BgvReport from "@/pages/bgv-report";
-import CompanyDashboard from "@/pages/company-dashboard";
-import CompanySignUp from "@/pages/company-signup";
 import DeleteUsers from "@/pages/delete-users";
 import Requests from "@/pages/request";
 import RequestsView from "@/pages/requests-view";
@@ -17,10 +17,8 @@ import UserBGV from "@/pages/user-bgv";
 import UserDashboard from "@/pages/user-dashboard";
 import UserInfo from "@/pages/user-info.tsx";
 import UserSignUp from "@/pages/user-signup";
-import { RootState } from "@/redux/store";
-import { useSelector } from "react-redux";
+import { getUserRole, Role } from "@/utils/get-role";
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import ProtectedRoute from "./protected-route";
 import {
   URLAccount,
   URLAddUsers,
@@ -42,9 +40,9 @@ import {
 } from "./router-link";
 
 const RoleBasedDashboard = () => {
-  const { role } = useSelector((state: RootState) => state.userReducer);
+  const role: Role = getUserRole();
 
-  if (role === "Admin") {
+  if (role === "admin") {
     return <CompanyDashboard />;
   } else if (role === "user") {
     return <UserDashboard />;
@@ -63,159 +61,61 @@ const router = createBrowserRouter([
     children: [
       {
         path: URLDashboard(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["user", "Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <RoleBasedDashboard />
-          </ProtectedRoute>
-        ),
+        element: <RoleBasedDashboard />,
       },
       {
         path: URLTimeSheets(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["user", "Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <TimeSheets />
-          </ProtectedRoute>
-        ),
+        element: <TimeSheets />,
       },
       {
         path: URLTimeSheetsView(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["user", "Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <TimeSheetsView />
-          </ProtectedRoute>
-        ),
+        element: <TimeSheetsView />,
       },
       {
         path: URLTimeSheetsTemplateTwo(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["user", "Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <NewTimeSheetTemplateTwo />
-          </ProtectedRoute>
-        ),
+        element: <NewTimeSheetTemplateTwo />,
       },
       {
         path: URLTermsConditions(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["user", "Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <Terms />
-          </ProtectedRoute>
-        ),
+        element: <Terms />,
       },
       {
         path: URLRequests(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["user", "Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <Requests />
-          </ProtectedRoute>
-        ),
+        element: <Requests />,
       },
       {
         path: URLRequestsView(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["user", "Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <RequestsView />
-          </ProtectedRoute>
-        ),
+        element: <RequestsView />,
       },
       {
         path: URLAccount(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["user", "Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <Account />
-          </ProtectedRoute>
-        ),
+        element: <Account />,
       },
       {
         path: URLApplications(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["user", "Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <Applications />
-          </ProtectedRoute>
-        ),
+        element: <Applications />,
       },
       {
         path: URLUserInfo(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["user", "Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <UserInfo />
-          </ProtectedRoute>
-        ),
+        element: <UserInfo />,
       },
       {
         path: URLAddUsers(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <AddUsers />
-          </ProtectedRoute>
-        ),
+        element: <AddUsers />,
       },
       {
         path: URLDeleteUsers(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <DeleteUsers />
-          </ProtectedRoute>
-        ),
+        element: <DeleteUsers />,
       },
       {
         path: URLBGVReport(),
-        element: (
-          <ProtectedRoute
-            allowedRoles={["user", "Admin"]}
-            fallback={<Navigate to={URLSignIn()} />}
-          >
-            <BgvReport />
-          </ProtectedRoute>
-        ),
+        element: <BgvReport />,
       },
     ],
   },
   {
     path: URLUserBGV(),
-    element: (
-      <ProtectedRoute
-        allowedRoles={["user", "Admin"]}
-        fallback={<Navigate to={URLSignIn()} />}
-      >
-        <UserBGV />
-      </ProtectedRoute>
-    ),
+    element: <UserBGV />,
   },
 ]);
 

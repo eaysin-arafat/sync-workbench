@@ -1,4 +1,4 @@
-import { Input } from "@mantine/core";
+import { Input as MantineInput } from "@mantine/core";
 
 // INPUT PROPS
 type Props = {
@@ -20,7 +20,7 @@ type Props = {
 };
 
 // input component
-const FormInput = (props: Props) => {
+const Input = (props: Props) => {
   const {
     value,
     onChange,
@@ -40,13 +40,13 @@ const FormInput = (props: Props) => {
   } = props;
 
   return (
-    <Input.Wrapper
+    <MantineInput.Wrapper
       label={label}
       styles={{ label: { fontSize: "15px" } }}
       withAsterisk={required}
       error={errMsg}
     >
-      <Input
+      <MantineInput
         placeholder={placeholder ? placeholder : `Type ${label}`}
         value={value}
         styles={{
@@ -65,8 +65,8 @@ const FormInput = (props: Props) => {
         type={type}
         error={errMsg}
       />
-    </Input.Wrapper>
+    </MantineInput.Wrapper>
   );
 };
 
-export default FormInput;
+export default Input;

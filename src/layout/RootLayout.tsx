@@ -3,9 +3,9 @@ import { Outlet } from "react-router-dom";
 
 const RootLayout: React.FC = () => {
   return (
-    <div className="bg-[#FAFAFB] px-5 min-h-screen">
+    <div className="bg-[#FAFAFB] px-5">
       <Navbar />
-      <main className="w-[1440px] mx-auto">
+      <main className="mx-auto">
         <Outlet />
       </main>
     </div>

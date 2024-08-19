@@ -1,10 +1,6 @@
 import UploadIcon from "@/assets/UploadIcon";
-import { fetchUploadMedia } from "@/redux/reducers/user-bgv-slicer";
-import { AppDispatch } from "@/redux/store";
-import { getPortalInfo } from "@/utils/get-protal-info";
 import { IconX } from "@tabler/icons-react"; // Import the cross icon
 import React, { ReactNode, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
 
 // INPUT PROPS
 type Props = {
@@ -24,7 +20,7 @@ type Props = {
   setAttachments?: (attachments: FileList | null) => void; // Handle null case
 };
 
-const FileInput = (props: Props) => {
+const FileUpload = (props: Props) => {
   const {
     name,
     label,
@@ -40,8 +36,6 @@ const FileInput = (props: Props) => {
     setAttachments,
     value,
   } = props;
-
-  const dispatch: AppDispatch = useDispatch();
 
   const [fileName, setFileName] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -66,19 +60,6 @@ const FileInput = (props: Props) => {
       if (setAttachments) {
         setAttachments(files);
       }
-
-      const { portalUrl } = getPortalInfo();
-      dispatch(
-        fetchUploadMedia({
-          Company_Portal_Url: portalUrl,
-          key: name,
-          file: selectedFile,
-        })
-      )
-        .unwrap()
-        .catch((error) => {
-          console.log("Upload failed", error);
-        });
     }
   };
 
@@ -159,4 +140,4 @@ const FileInput = (props: Props) => {
   );
 };
 
-export default FileInput;
+export default FileUpload;

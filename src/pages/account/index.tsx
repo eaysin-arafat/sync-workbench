@@ -1,17 +1,13 @@
-import EditProfile from "@/component/account/EditProfile";
-import Security from "@/component/account/Security";
+import EditProfile from "@/component/account/edit-profile";
+import Security from "@/component/account/security";
 import MantineTab, { TabContentType } from "@/component/tabs";
-import { RootState } from "@/redux/store";
-import { useSelector } from "react-redux";
 
 const Account = () => {
-  const { signInData } = useSelector((state: RootState) => state.userReducer);
-
   const tabsContent: TabContentType = {
     components: [
       {
         id: "edit-profile",
-        component: <EditProfile signInData={signInData} />,
+        component: <EditProfile signInData={{}} />,
       },
       { id: "security", component: <Security /> },
     ],
