@@ -4,10 +4,10 @@ import {
   URLDashboard,
   URLRequests,
   URLTimeSheets,
-} from "@/Routes/router-link";
+} from "@/routes/router-link";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../../Assets/logo.png";
+import logo from "../../assets/logo.png";
 import User from "./user";
 import UserNotifications from "./user-notifications";
 

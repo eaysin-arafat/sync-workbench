@@ -1,5 +1,3 @@
-import FileInput from "@/Component/UI/FormElements/FileInput";
-import FormInput from "@/Component/UI/FormElements/FormInput";
 import {
   fetchCreateTimeSheets,
   fetchGetTimeSheetsCount,
@@ -8,9 +6,9 @@ import {
   fetchGetTimeSheetsWeek,
 } from "@/redux/reducers/time-sheets-slicer";
 import { RootState } from "@/redux/store";
-import { TimeArray } from "@/Types/types";
+import { TimeArray } from "@/types/types";
 import { getMonthNumber } from "@/utils/get-month-number";
-import { Button } from "@mantine/core";
+import { Button, FileInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { notifications } from "@mantine/notifications";
 import { IconPlus } from "@tabler/icons-react";
@@ -18,6 +16,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Tooltip from "../tooltip";
+import FormInput from "../ui/form-elements/input";
 
 interface InputGroup {
   id: string;
@@ -254,7 +253,7 @@ const NewTimeSheetModal = ({
           onChange={(e) => setTask(e.target.value)}
           value={task}
         />
-        <FileInput label="Attachment" name="attachment" isEndIcon />
+        <FileInput label="Attachment" name="attachment" />
         {inputGroups.map((group) => (
           <div key={group.id} className="col-span-2 flex gap-5">
             <div className="w-1/2">

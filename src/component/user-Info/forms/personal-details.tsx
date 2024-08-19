@@ -1,6 +1,6 @@
-import FormInput from "@/Component/UI/FormElements/FormInput";
-import PhoneNumberInput from "@/Component/UI/FormElements/PhoneNumberInput";
-import SelectInput from "@/Component/UI/FormElements/SelectInput";
+import FormInput from "@/component/ui/form-elements/input";
+import PhoneNumberInput from "@/component/ui/form-elements/phone-number-input";
+import SelectInput from "@/component/ui/form-elements/select";
 import UploadFile from "../upload-file";
 
 const PersonalDetails = () => {

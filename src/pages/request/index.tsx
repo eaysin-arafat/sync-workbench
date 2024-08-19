@@ -1,6 +1,7 @@
-import RequestViewTimesheetModal from "@/Component/Request/RequestTimesheetModal";
-import { URLRequestsView } from "@/Routes/router-link";
-import { RequestType } from "@/Types/requestType";
+import RequestViewTimeSheetModal from "@/component/request/request-timesheet-modal";
+import RequestViewModal from "@/component/request/request-view-modal";
+import { URLRequestsView } from "@/routes/router-link";
+import { RequestType } from "@/types/requestType";
 import { Button, Menu, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
@@ -10,7 +11,6 @@ import { CgProfile } from "react-icons/cg";
 import { IoWarningOutline } from "react-icons/io5";
 import { MdTimelapse } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import RequestViewModal from "../../Component/Request/RequestViewModal";
 
 const requestData = [
   {
@@ -115,7 +115,7 @@ const Requests = () => {
         centered
       >
         {viewType === "time-sheet" ? (
-          <RequestViewTimesheetModal close={close} data={null as any} />
+          <RequestViewTimeSheetModal close={close} data={null as any} />
         ) : (
           <RequestViewModal close={close} type={viewType as RequestType} />
         )}

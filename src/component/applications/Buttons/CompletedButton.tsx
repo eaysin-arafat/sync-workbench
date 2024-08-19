@@ -1,4 +1,4 @@
-import CompletedIcon from "@/Assets/status/CompletedIcon";
+import CompletedIcon from "@/assets/status/CompletedIcon";
 
 interface ButtonProps {
   onClick?: () => void;

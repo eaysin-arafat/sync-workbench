@@ -1,5 +1,5 @@
-import DownloadIcon from "@/Assets/second-dashboard/DownloadIcon";
-import PlusIcon from "@/Assets/second-dashboard/PlusIcon";
+import DownloadIcon from "@/assets/second-dashboard/DownloadIcon";
+import PlusIcon from "@/assets/second-dashboard/PlusIcon";
 import FileInput from "@/Component/UI/FormElements/FileInput";
 import FormInput from "@/Component/UI/FormElements/FormInput";
 import { Button, Select } from "@mantine/core";

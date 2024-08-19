@@ -1,4 +1,4 @@
-import ImageIcon from "@/Assets/bgv-report/ImageIcon";
+import ImageIcon from "@/assets/bgv-report/ImageIcon";
 import ReusableTable from "../bgv-table";
 
 const tableData = [

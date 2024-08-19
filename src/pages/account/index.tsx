@@ -1,8 +1,8 @@
-import MantineTab, { TabContentType } from "@/Component/Tabs/MantineTab";
+import EditProfile from "@/component/account/EditProfile";
+import Security from "@/component/account/Security";
+import MantineTab, { TabContentType } from "@/component/tabs";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
-import EditProfile from "../../Component/Account/EditProfile";
-import Security from "../../Component/Account/Security";
 
 const Account = () => {
   const { signInData } = useSelector((state: RootState) => state.userReducer);

@@ -1,7 +1,7 @@
-import MenuIcon from "@/Assets/application-icon/MenuIcon";
-import UserIcon from "@/Assets/application-icon/UserIcon";
-import CompletedIcon from "@/Assets/status/CompletedIcon";
-import { URLUserInfo } from "@/Routes/router-link";
+import MenuIcon from "@/assets/application-icon/MenuIcon";
+import UserIcon from "@/assets/application-icon/UserIcon";
+import CompletedIcon from "@/assets/status/CompletedIcon";
+import { URLUserInfo } from "@/routes/router-link";
 import { Menu } from "@mantine/core";
 import { Link } from "react-router-dom";
 

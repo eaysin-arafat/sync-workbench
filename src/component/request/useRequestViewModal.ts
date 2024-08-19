@@ -3,13 +3,12 @@ import {
   fetchUpdateUserRequest,
 } from "@/redux/reducers/user-requests-slicer";
 import { AppDispatch } from "@/redux/store";
-import { RequestObjType, requestType } from "@/Types/requestType";
+import { RequestObjType, requestType, RequestType } from "@/types/requestType";
 import { getPortalInfo } from "@/utils/get-protal-info";
 import { notifications } from "@mantine/notifications";
 import React, { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { RequestListType } from "../request-table/request-single-list";
-import { RequestType } from "./../../Types/requestType";
 
 type FormState = {
   requestPriority: string;

@@ -1,10 +1,10 @@
+import SignInBg from "@/component/signin/signin-bg";
+import FormInput from "@/component/ui/form-elements/input";
+import PhoneNumberInput from "@/component/ui/form-elements/phone-number-input";
+import { URLSignIn } from "@/routes/router-link";
 import { Checkbox } from "@mantine/core";
 import { PiLockThin } from "react-icons/pi";
 import { Link } from "react-router-dom";
-import SignInBg from "../../Component/SignIn/SignInBg";
-import FormInput from "../../Component/UI/FormElements/FormInput";
-import PhoneNumberInput from "../../Component/UI/FormElements/PhoneNumberInput";
-import { URLSignIn } from "../../Routes/router-link";
 
 const CompanySignUp = () => {
   return (

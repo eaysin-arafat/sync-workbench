@@ -1,9 +1,9 @@
-import DeleteIcon from "@/Assets/add-users/DeleteIcon";
-import UserIcon from "@/Assets/application-icon/UserIcon";
-import SelectInput from "@/Component/UI/FormElements/SelectInput";
-import TextareaInput from "@/Component/UI/FormElements/TextareaInput";
+import DeleteIcon from "@/assets/add-users/DeleteIcon";
+import UserIcon from "@/assets/application-icon/UserIcon";
 import { Button, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import SelectInput from "../ui/form-elements/select";
+import TextareaInput from "../ui/form-elements/textarea";
 
 const DeleteUserProfile = () => {
   const [opened, { open, close }] = useDisclosure(false);

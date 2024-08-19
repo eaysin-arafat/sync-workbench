@@ -1,4 +1,4 @@
-import DropdownIcon from "@/Assets/filter/DropdownIcon";
+import DropdownIcon from "@/assets/filter/DropdownIcon";
 import { Box, Collapse, Group } from "@mantine/core";
 import { useRef, useState } from "react";
 

@@ -1,7 +1,8 @@
-import CalenderType1 from "@/Assets/Icons/CalenderType1";
-import PDFType1 from "@/Assets/Icons/PDFType1";
-import NewTimeSheetModal from "@/Component/TimeSheets/NewTimeSheetModal";
-import DocumentsPreviewModal from "@/Component/TimesheetTable/DocumentsPreviewModal";
+import CalenderType1 from "@/assets/Icons/CalenderType1";
+import PDFType1 from "@/assets/Icons/PDFType1";
+import NewTimeSheetModal from "@/component/time-sheets/new-time-sheet-modal";
+import DocumentsPreviewModal from "@/component/timesheet-table/documents-preview-modal";
+
 import { fetchDeleteTimeSheets } from "@/redux/reducers/time-sheets-slicer";
 import { fetchGetMediaUploaded } from "@/redux/reducers/user-bgv-slicer";
 import { AppDispatch, RootState } from "@/redux/store";

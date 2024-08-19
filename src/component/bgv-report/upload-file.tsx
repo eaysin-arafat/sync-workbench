@@ -1,4 +1,4 @@
-import ImageIcon from "@/Assets/user-info/ImageIcon";
+import ImageIcon from "@/assets/user-info/ImageIcon";
 import React, { useRef } from "react";
 
 // INPUT PROPS

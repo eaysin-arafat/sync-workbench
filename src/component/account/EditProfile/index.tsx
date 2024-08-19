@@ -1,5 +1,5 @@
-import FormInput from "@/Component/UI/FormElements/FormInput";
-import ProfileUploadButton from "@/Component/UI/ProfileUploadAndDisplay/ProfileUpload";
+import ProfileUploadButton from "@/component/profile-upload-display/profile-upload";
+import FormInput from "@/component/ui/form-elements/input";
 import { PasswordInput } from "@mantine/core";
 import DisplayProfile from "./DisplayProfile";
 

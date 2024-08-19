@@ -1,17 +1,17 @@
+import FormInput from "@/component/ui/form-elements/input";
 import { fetchUserSignIn } from "@/redux/reducers/user-slicer";
 import { AppDispatch, RootState } from "@/redux/store";
+import {
+  URLCompanySignup,
+  URLDashboard,
+  URLUserBGV,
+} from "@/routes/router-link";
 import { PasswordInput } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useEffect, useState } from "react";
 import { PiLockThin } from "react-icons/pi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import FormInput from "../../Component/UI/FormElements/FormInput";
-import {
-  URLCompanySignup,
-  URLDashboard,
-  URLUserBGV,
-} from "../../Routes/router-link";
 
 const SignIn = () => {
   const dispatch = useDispatch<AppDispatch>();

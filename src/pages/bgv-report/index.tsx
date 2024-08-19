@@ -1,17 +1,17 @@
-import BackButtonIcon from "@/Assets/user-info/BackButtonIcon";
-import DownloadIcon from "@/Assets/user-info/DownloadIcon";
+import BackButtonIcon from "@/assets/user-info/BackButtonIcon";
+import DownloadIcon from "@/assets/user-info/DownloadIcon";
 
-import EmailIcon from "@/Assets/bgv-report/EmailIcon";
-import logo from "@/Assets/logo.png";
-import CriminalRecordsVerification from "@/Component/BgvReport/Forms/CriminalRecordVerification";
-import DrugTest from "@/Component/BgvReport/Forms/DrugTest";
-import EducationVerification from "@/Component/BgvReport/Forms/EducationVerification";
-import EmploymentVerification from "@/Component/BgvReport/Forms/EmploymentVerification";
-import ExecutiveSummary from "@/Component/BgvReport/Forms/ExecutiveSummary";
-import GlobalDatabaseCheck from "@/Component/BgvReport/Forms/GlobalDatabaseCheck";
-import CollapsibleContainer from "@/Component/UI/Collapse/Collapse";
+import EmailIcon from "@/assets/bgv-report/EmailIcon";
+import logo from "@/assets/logo.png";
 
-import IdentityVerification from "@/Component/BgvReport/Forms/IdentityVerification";
+import CriminalRecordsVerification from "@/component/bgv-report/forms/criminal-record-verification";
+import DrugTest from "@/component/bgv-report/forms/drug-test";
+import EducationVerification from "@/component/bgv-report/forms/education-verification";
+import EmploymentVerification from "@/component/bgv-report/forms/employment-verification";
+import ExecutiveSummary from "@/component/bgv-report/forms/executive-summary";
+import GlobalDatabaseCheck from "@/component/bgv-report/forms/global-database-check";
+import IdentityVerification from "@/component/bgv-report/forms/identity-verification";
+import CollapsibleContainer from "@/component/ui/collapse";
 import { Button } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 

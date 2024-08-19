@@ -1,4 +1,4 @@
-import VerifiedIcon from "@/Assets/bgv-report/VerifiedIcon";
+import VerifiedIcon from "@/assets/bgv-report/VerifiedIcon";
 
 type DataType = {
   [key: string]: any;

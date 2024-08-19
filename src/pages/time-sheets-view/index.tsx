@@ -1,21 +1,22 @@
-import SingleListDay from "@/Component/TimesheetTable/SingleListDay";
-import SingleListMonth from "@/Component/TimesheetTable/SingleListMonth";
-import SingleListWeek from "@/Component/TimesheetTable/SingleListWeek";
-import TimeSheetTableHeader from "@/Component/TimesheetTable/TimeSheetTableHeader";
 import {
   fetchGetTimeSheetsDay,
   fetchGetTimeSheetsMonth,
   fetchGetTimeSheetsWeek,
 } from "@/redux/reducers/time-sheets-slicer";
 import { AppDispatch, RootState } from "@/redux/store";
-import { URLTimeSheetsTemplateTwo } from "@/Routes/router-link";
 import { getMonthNumber } from "@/utils/get-month-number";
 import { Button, LoadingOverlay, Modal, Tabs } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import NewTimeSheetModal from "../../Component/TimeSheets/NewTimeSheetModal";
+
+import NewTimeSheetModal from "@/component/time-sheets/new-time-sheet-modal";
+import SingleListDay from "@/component/timesheet-table/single-list-day";
+import SingleListMonth from "@/component/timesheet-table/single-list-month";
+import SingleListWeek from "@/component/timesheet-table/single-list-week";
+import TimeSheetTableHeader from "@/component/timesheet-table/time-sheet-table-header";
+import { URLTimeSheetsTemplateTwo } from "@/routes/router-link";
 import classes from "./timesheetview.module.css";
 
 export interface TimeSheetDataDay {

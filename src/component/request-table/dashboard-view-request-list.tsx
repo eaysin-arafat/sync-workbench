@@ -1,4 +1,4 @@
-import CalenderType1 from "@/Assets/Icons/CalenderType1";
+import CalenderType1 from "@/assets/Icons/CalenderType1";
 import { Button, Checkbox, Menu, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";

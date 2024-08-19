@@ -1,10 +1,11 @@
-import BackButtonIcon from "@/Assets/user-info/BackButtonIcon";
-import FormInput from "@/Component/UI/FormElements/FormInput";
-import PhoneNumberInput from "@/Component/UI/FormElements/PhoneNumberInput";
-import ProfileUploadButton from "@/Component/UI/ProfileUploadAndDisplay/ProfileUpload";
+import BackButtonIcon from "@/assets/user-info/BackButtonIcon";
+import DisplayProfile from "@/component/profile-upload-display/display-profile";
+import ProfileUploadButton from "@/component/profile-upload-display/profile-upload";
+import FormInput from "@/component/ui/form-elements/input";
+import PhoneNumberInput from "@/component/ui/form-elements/phone-number-input";
+
 import { Button } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-import DisplayProfile from "../../Component/Account/EditProfile/DisplayProfile";
 
 const AddUsers = () => {
   const navigate = useNavigate();

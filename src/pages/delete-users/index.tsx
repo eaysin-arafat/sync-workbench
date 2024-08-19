@@ -1,7 +1,7 @@
-import { URLAddUsers } from "@/Routes/router-link";
+import DeleteUserProfile from "@/component/delete-users/delete-user-profile";
+import { URLAddUsers } from "@/routes/router-link";
 import { Button } from "@mantine/core";
 import { Link } from "react-router-dom";
-import DeleteUserProfile from "../../Component/DeleteUsers/DeleteUserProfile";
 
 const DeleteUsers = () => {
   return (

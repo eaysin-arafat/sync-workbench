@@ -1,6 +1,6 @@
-import LeaveRequestIcon from "@/Assets/notification/LeaveRequestIcon";
-import ProfileIcon from "@/Assets/notification/ProfileIcon";
-import SettingIcon from "@/Assets/notification/SettingIcon";
+import LeaveRequestIcon from "@/assets/notification/LeaveRequestIcon";
+import ProfileIcon from "@/assets/notification/ProfileIcon";
+import SettingIcon from "@/assets/notification/SettingIcon";
 import { useState } from "react";
 
 export interface NotificationType {

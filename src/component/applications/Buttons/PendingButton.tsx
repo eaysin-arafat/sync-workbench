@@ -1,4 +1,4 @@
-import PendingIcon from "@/Assets/status/PendingIcon";
+import PendingIcon from "@/assets/status/PendingIcon";
 
 interface ButtonProps {
   onClick?: () => void;

@@ -1,6 +1,6 @@
+import FormInput from "@/component/ui/form-elements/input";
+import SelectInput from "@/component/ui/form-elements/select";
 import { ChangeEvent } from "react";
-import { default as FormInput } from "../../../Component/UI/FormElements/FormInput";
-import Select from "../../../Component/UI/FormElements/SelectInput";
 
 export type ResidentialDetailsType = {
   CurrentAddress_Street: string;
@@ -63,7 +63,7 @@ const ResidentialDetails = ({
               value={formData?.CurrentAddress_PINcode}
               onChange={handleChange}
             />
-            <Select
+            <SelectInput
               label="Country"
               name="CurrentAddress_Country"
               value={formData?.CurrentAddress_Country || ""}
@@ -108,7 +108,7 @@ const ResidentialDetails = ({
               value={formData?.PermanentAddress_PINcode}
               onChange={handleChange}
             />
-            <Select
+            <SelectInput
               label="Country"
               name="PermanentAddress_Country"
               value={formData?.PermanentAddress_Country || ""}

@@ -1,6 +1,6 @@
-import FileInput from "@/Component/UI/FormElements/FileInput";
+import FormInput from "@/component/ui/form-elements/input";
+import FileInput from "@/component/ui/form-elements/upload-file";
 import { ChangeEvent } from "react";
-import FormInput from "../../../Component/UI/FormElements/FormInput";
 
 export type IdentityDetailsType = {
   UAN_Number: string;

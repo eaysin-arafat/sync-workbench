@@ -1,7 +1,7 @@
-import FileInput from "@/Component/UI/FormElements/FileInput";
-import FormInput from "@/Component/UI/FormElements/FormInput";
-import PhoneNumberInput from "@/Component/UI/FormElements/PhoneNumberInput";
-import Select from "@/Component/UI/FormElements/SelectInput";
+import FormInput from "@/component/ui/form-elements/input";
+import PhoneNumberInput from "@/component/ui/form-elements/phone-number-input";
+import SelectInput from "@/component/ui/form-elements/select";
+import FileInput from "@/component/ui/form-elements/upload-file";
 import { DatePickerInput } from "@mantine/dates";
 import { ChangeEvent } from "react";
 
@@ -91,7 +91,7 @@ const PersonalDetails = ({
           required
         />
 
-        <Select
+        <SelectInput
           label="Marital status"
           placeholder="Select Marital Status"
           required

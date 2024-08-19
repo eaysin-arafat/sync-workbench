@@ -1,9 +1,8 @@
-import DownloadIcon from "@/Assets/second-dashboard/DownloadIcon";
-import PlusIcon from "@/Assets/second-dashboard/PlusIcon";
-import FileInput from "@/Component/UI/FormElements/FileInput";
-import FormInput from "@/Component/UI/FormElements/FormInput";
-import { Button, Select } from "@mantine/core";
+import PlusIcon from "@/assets/second-dashboard/PlusIcon";
+
+import { Button, FileInput, Select } from "@mantine/core";
 import { useState } from "react";
+import FormInput from "../ui/form-elements/input";
 
 const initialState = {
   client: "",
@@ -42,8 +41,6 @@ const NewTimeSheetTemplateTwo = () => {
           label="Attachment"
           required
           className="flex items-center gap-2"
-          startIcon={<DownloadIcon />}
-          height="44px"
         />
 
         <Button

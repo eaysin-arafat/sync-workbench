@@ -1,7 +1,7 @@
-import FileInput from "@/Component/UI/FormElements/FileInput";
-import FormInput from "@/Component/UI/FormElements/FormInput";
-import SelectInput from "@/Component/UI/FormElements/SelectInput";
-import { UserBgvFormDataType } from "@/Pages/UserBGV";
+import FormInput from "@/component/ui/form-elements/input";
+import SelectInput from "@/component/ui/form-elements/select";
+import FileInput from "@/component/ui/form-elements/upload-file";
+import { UserBgvFormDataType } from "@/pages/user-bgv";
 import { Button } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { VscDash } from "react-icons/vsc";

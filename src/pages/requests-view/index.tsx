@@ -1,14 +1,14 @@
-import BackButtonIcon from "@/Assets/user-info/BackButtonIcon";
+import BackButtonIcon from "@/assets/user-info/BackButtonIcon";
 import RequestSingleList, {
   RequestListType,
-} from "@/Component/RequestTable/RequestSingleList";
-import RequestTableHeader from "@/Component/RequestTable/RequestTableHeader";
+} from "@/component/request-table/request-single-list";
+import RequestTableHeader from "@/component/request-table/request-table-header";
 import {
   fetchDeleteUserRequest,
   fetchGetUserRequest,
 } from "@/redux/reducers/user-requests-slicer";
 import { AppDispatch, RootState } from "@/redux/store";
-import { RequestType, requestType } from "@/Types/requestType";
+import { requestType, RequestType } from "@/types/requestType";
 import { Button } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useEffect, useState } from "react";

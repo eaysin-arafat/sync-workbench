@@ -1,4 +1,4 @@
-import FailedIcon from "@/Assets/status/FaildIcon";
+import FailedIcon from "@/assets/status/FaildIcon";
 
 interface ButtonProps {
   onClick?: () => void;

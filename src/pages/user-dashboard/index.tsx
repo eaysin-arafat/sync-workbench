@@ -1,6 +1,3 @@
-import CalenderType1 from "@/Assets/Icons/CalenderType1";
-import TimeOff from "@/Assets/Icons/TimeOff";
-import TimeSheet from "@/Assets/Icons/TimeSheet";
 import { fetchGetDashboardData } from "@/redux/reducers/extra-slicer";
 import { fetchGetTimeSheetsCount } from "@/redux/reducers/time-sheets-slicer";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -9,8 +6,12 @@ import { useEffect, useState } from "react";
 import { BsFillSendFill } from "react-icons/bs";
 import { IoWarningOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import CompanyCard from "../../Component/Dashboard/CompanyCard";
-import MainCard from "../../Component/UI/Card/MainCard";
+
+import CalenderType1 from "@/assets/Icons/CalenderType1";
+import TimeOff from "@/assets/Icons/TimeOff";
+import TimeSheet from "@/assets/Icons/TimeSheet";
+import CompanyCard from "@/component/dashboard/company-card";
+import MainCard from "@/component/ui/card";
 import SingleListTimeSheet from "./SingleListTimeSheet";
 import SingleRequestList from "./SingleRequestList";
 import SingleTimesheetDay from "./SingleTimesheetDay";

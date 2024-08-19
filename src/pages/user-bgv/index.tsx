@@ -1,27 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import ApplicationSubmit from "@/Component/UserBGV/Forms/ApplicationSubmit";
-import EducationDetails, {
-  EducationalDetailsType,
-} from "@/Component/UserBGV/Forms/EducationDetails";
-import EmploymentDetails, {
-  EmploymentDetailsType,
-} from "@/Component/UserBGV/Forms/EmploymentDetails";
-import IdentifyDetails, {
-  IdentityDetailsType,
-} from "@/Component/UserBGV/Forms/IdentityDetails";
-import PersonalDetails, {
-  PersonalDetailsType,
-} from "@/Component/UserBGV/Forms/PersonalDetails";
-import ResidentialDetails, {
-  ResidentialDetailsType,
-} from "@/Component/UserBGV/Forms/ResidentialDetails";
+
 import {
   fetchCreateUserBGVForm,
   fetchUpdateUserBGVForm,
   fetchUserBGVData,
 } from "@/redux/reducers/user-bgv-slicer";
 import { AppDispatch, RootState } from "@/redux/store";
-import { URLDashboard } from "@/Routes/router-link";
+
+import ApplicationSubmit from "@/component/user-bgv/forms/application-submit";
+import EducationDetails, {
+  EducationalDetailsType,
+} from "@/component/user-bgv/forms/education-details";
+import EmploymentDetails, {
+  EmploymentDetailsType,
+} from "@/component/user-bgv/forms/employment-details";
+import IdentifyDetails, {
+  IdentityDetailsType,
+} from "@/component/user-bgv/forms/identity-details";
+import PersonalDetails, {
+  PersonalDetailsType,
+} from "@/component/user-bgv/forms/personal-details";
+import ResidentialDetails, {
+  ResidentialDetailsType,
+} from "@/component/user-bgv/forms/residential-details";
+import { URLDashboard } from "@/routes/router-link";
 import { getPortalInfo } from "@/utils/get-protal-info";
 import { Button } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
@@ -30,7 +32,7 @@ import { IoMdArrowBack } from "react-icons/io";
 import { TiTick } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import logo from "../../Assets/logo.png";
+import logo from "../../assets/logo.png";
 import { getInitialState } from "./helper/constant";
 import { determineCurrentStep } from "./helper/determineCurrentStep";
 import { validateStep } from "./helper/validateStep";

@@ -1,7 +1,7 @@
+import SignInBg from "@/component/signin/signin-bg";
+import PhoneNumberInput from "@/component/ui/form-elements/phone-number-input";
 import { Checkbox, FileInput, PasswordInput } from "@mantine/core";
 import { PiLockThin } from "react-icons/pi";
-import SignInBg from "../../Component/SignIn/SignInBg";
-import PhoneNumberInput from "../../Component/UI/FormElements/PhoneNumberInput";
 
 const UserSignUp = () => {
   return (

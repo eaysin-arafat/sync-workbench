@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import img1 from "../../Assets/home-image-1.png";
+import img1 from "../../assets/home-image-1.png";
 
 const Terms = () => {
   const [accepted, setAccepted] = useState(false);

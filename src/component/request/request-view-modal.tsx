@@ -1,11 +1,11 @@
-import FormInput from "@/Component/UI/FormElements/FormInput";
-import { default as SelectInput } from "@/Component/UI/FormElements/SelectInput";
-import TextareaInput from "@/Component/UI/FormElements/TextareaInput";
-import { RequestType } from "@/Types/requestType";
+import { RequestType } from "@/types/requestType";
 import { Button } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { RequestListType } from "../request-table/request-single-list";
 import Tooltip from "../tooltip";
+import FormInput from "../ui/form-elements/input";
+import SelectInput from "../ui/form-elements/select";
+import TextareaInput from "../ui/form-elements/textarea";
 import useRequestViewModal from "./useRequestViewModal";
 
 type Props = {

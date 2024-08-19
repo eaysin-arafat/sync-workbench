@@ -1,15 +1,14 @@
-import FileInput from "@/Component/UI/FormElements/FileInput";
-import FormInput from "@/Component/UI/FormElements/FormInput";
 import { fetchCreateUserRequest } from "@/redux/reducers/user-requests-slicer";
 import { RootState } from "@/redux/store";
-import { TimeArray } from "@/Types/types";
-import { Button } from "@mantine/core";
+import { TimeArray } from "@/types/types";
+import { Button, FileInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { notifications } from "@mantine/notifications";
 import { IconPlus } from "@tabler/icons-react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Tooltip from "../tooltip";
+import FormInput from "../ui/form-elements/input";
 
 interface InputGroup {
   id: string;
@@ -220,7 +219,7 @@ const RequestViewTimeSheetModal = ({
           value={task}
           onChange={(e) => setTask(e.target.value)}
         />
-        <FileInput label="Attachment" name="attachment" isEndIcon />
+        <FileInput label="Attachment" name="attachment" />
         {inputGroups.map((group) => (
           <div key={group.id} className="col-span-2 flex gap-5">
             <div className="w-1/2">

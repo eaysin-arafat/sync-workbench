@@ -1,5 +1,5 @@
-import FilterIcon from "@/Assets/filter/FilterIcon";
-import ResetIcon from "@/Assets/filter/ResetIcon";
+import FilterIcon from "@/assets/filter/FilterIcon";
+import ResetIcon from "@/assets/filter/ResetIcon";
 import { useState } from "react";
 import CompletedButton from "./Buttons/CompletedButton";
 import FailedButton from "./Buttons/FailedButton";

@@ -1,4 +1,4 @@
-import UploadIcon from "@/Assets/UploadIcon";
+import UploadIcon from "@/assets/UploadIcon";
 import { fetchUploadMedia } from "@/redux/reducers/user-bgv-slicer";
 import { AppDispatch } from "@/redux/store";
 import { getPortalInfo } from "@/utils/get-protal-info";

@@ -1,4 +1,4 @@
-import image from "../../Assets/company-signup.png";
+import image from "../../assets/company-signup.png";
 
 const SignInBg = () => {
   return (

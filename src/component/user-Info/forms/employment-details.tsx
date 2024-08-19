@@ -1,5 +1,5 @@
-import FormInput from "@/Component/UI/FormElements/FormInput";
-import SelectInput from "@/Component/UI/FormElements/SelectInput";
+import FormInput from "@/component/ui/form-elements/input";
+import SelectInput from "@/component/ui/form-elements/select";
 import { VscDash } from "react-icons/vsc";
 import UploadFile from "../upload-file";
 

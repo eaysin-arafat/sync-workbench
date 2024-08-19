@@ -1,3 +1,4 @@
+import TimeSheetCard from "@/component/time-sheets/time-sheet-card";
 import { fetchGetTimeSheetsCount } from "@/redux/reducers/time-sheets-slicer";
 import { AppDispatch, RootState } from "@/redux/store";
 import { rem } from "@mantine/core";
@@ -5,7 +6,6 @@ import { YearPickerInput } from "@mantine/dates";
 import { IconCalendar } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import TimeSheetCard from "../../Component/TimeSheets/TimeSheetCard";
 
 export interface timesheetCountDataProps {
   month: string;

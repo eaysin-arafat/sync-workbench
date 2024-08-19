@@ -1,5 +1,5 @@
-import CalenderType1 from "@/Assets/Icons/CalenderType1";
-import PDFType1 from "@/Assets/Icons/PDFType1";
+import CalenderType1 from "@/assets/Icons/CalenderType1";
+import PDFType1 from "@/assets/Icons/PDFType1";
 import { TimeSheetDataDay } from "@/Pages/TimeSheetsView";
 import {
   fetchDeleteTimeSheets,

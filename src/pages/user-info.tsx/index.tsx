@@ -1,14 +1,13 @@
-import BackButtonIcon from "@/Assets/user-info/BackButtonIcon";
-import DownloadIcon from "@/Assets/user-info/DownloadIcon";
-import BgBlackButton from "@/Component/UI/Button/BgBlackButton";
-
-import CollapsibleContainer from "@/Component/UI/Collapse/Collapse";
+import DownloadIcon from "@/assets/second-dashboard/DownloadIcon";
+import BackButtonIcon from "@/assets/user-info/BackButtonIcon";
+import BgBlackButton from "@/component/ui/button";
+import CollapsibleContainer from "@/component/ui/collapse";
+import EducationDetails from "@/component/user-Info/forms/education-details";
+import EmploymentDetails from "@/component/user-Info/forms/employment-details";
+import IdentityDetails from "@/component/user-Info/forms/identity-details";
+import PersonalDetails from "@/component/user-Info/forms/personal-details";
+import ResidentialDetails from "@/component/user-Info/forms/residential-details";
 import { useNavigate } from "react-router-dom";
-import EducationDetails from "../../Component/UserInfo/Forms/EducationDetails";
-import EmploymentDetails from "../../Component/UserInfo/Forms/EmploymentDetails";
-import IdentityDetails from "../../Component/UserInfo/Forms/IdentityDetails";
-import PersonalDetails from "../../Component/UserInfo/Forms/PersonalDetails";
-import ResidentialDetails from "../../Component/UserInfo/Forms/ResidentialDetails";
 
 const UserInfo = () => {
   const navigate = useNavigate();

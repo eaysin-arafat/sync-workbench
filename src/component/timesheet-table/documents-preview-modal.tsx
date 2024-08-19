@@ -1,5 +1,4 @@
-import React from "react";
-import DownloadIcon from "@/Assets/user-info/DownloadIcon";
+import DownloadIcon from "@/assets/user-info/DownloadIcon";
 import { Button } from "@mantine/core";
 import FileViewer from "react-file-viewer";
 

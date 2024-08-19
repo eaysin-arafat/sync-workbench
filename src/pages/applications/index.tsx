@@ -1,5 +1,5 @@
-import Filter from "@/Component/Applications/Filter";
-import UserProfile from "@/Component/Applications/UserProfile";
+import Filter from "@/component/applications/Filter";
+import UserProfile from "@/component/applications/UserProfile";
 
 const Applications = () => {
   return (

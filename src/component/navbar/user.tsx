@@ -1,6 +1,6 @@
-import ChangePasswordIcon from "@/Assets/account/ChangePasswordIcon";
-import LogoutIcon from "@/Assets/account/LogoutIcon";
-import ManageAccountIcon from "@/Assets/account/ManageAccount";
+import ChangePasswordIcon from "@/assets/account/ChangePasswordIcon";
+import LogoutIcon from "@/assets/account/LogoutIcon";
+import ManageAccountIcon from "@/assets/account/ManageAccount";
 import { setChangePassword } from "@/redux/reducers/extra-slicer";
 import { setClearAllData } from "@/redux/reducers/user-slicer";
 import { AppDispatch, RootState } from "@/redux/store";

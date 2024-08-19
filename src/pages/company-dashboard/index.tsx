@@ -1,15 +1,16 @@
-import { URLApplications } from "@/Routes/router-link";
 import { Select } from "@mantine/core";
 import { Link } from "react-router-dom";
-import completed from "../../Assets/application-icon/completed.png";
-import emailVerified from "../../Assets/application-icon/email-verified.png";
-import pending from "../../Assets/application-icon/pending.png";
-import total from "../../Assets/application-icon/total.png";
-import TableBody from "../../Component/CompanyDashboard/TableBody";
-import TableHeader from "../../Component/CompanyDashboard/TableHeader";
-import ItemsCard from "../../Component/Dashboard/UserCard";
-import MainCard from "../../Component/UI/Card/MainCard";
-import apiStatistics from "./../../Assets/api-statistics/api-statistics.png";
+import completed from "../../assets/application-icon/completed.png";
+import emailVerified from "../../assets/application-icon/email-verified.png";
+import pending from "../../assets/application-icon/pending.png";
+import total from "../../assets/application-icon/total.png";
+
+import TableBody from "@/component/company-dashboard/table-body";
+import TableHeader from "@/component/company-dashboard/table-header";
+import MainCard from "@/component/ui/card";
+import { URLApplications } from "@/routes/router-link";
+import ItemsCard from "../../component/dashboard/user-card";
+import apiStatistics from "./../../assets/api-statistics/api-statistics.png";
 
 const application = [
   { id: "total", icon: total, quantity: "3000", title: "Total" },

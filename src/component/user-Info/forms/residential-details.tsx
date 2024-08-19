@@ -1,4 +1,4 @@
-import FormInput from "@/Component/UI/FormElements/FormInput";
+import FormInput from "@/component/ui/form-elements/input";
 
 const ResidentialDetails = () => {
   return (
