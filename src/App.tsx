@@ -1,11 +1,10 @@
-import "./App.css";
-import { RouterProvider } from "react-router-dom";
-import router from "./Routes/Router";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RouterProvider } from "react-router-dom";
+import "./App.css";
+import { fetchRefreshToken } from "./redux/reducers/user-slicer";
 import { AppDispatch, RootState } from "./redux/store";
-import { useDispatch } from "react-redux";
-import { fetchRefreshToken } from "./redux/reducers/userSlicer";
+import router from "./Routes/Router";
 
 function App() {
   const { token } = useSelector((state: RootState) => state.userReducer);

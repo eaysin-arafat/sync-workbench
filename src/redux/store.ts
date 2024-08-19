@@ -1,11 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storageSession from "redux-persist/lib/storage/session";
-import timeSheets from "./reducers/timeSheetsSlicer";
-import userBGVReducer from "./reducers/userBGVSlicer";
-import userRequests from "./reducers/userRequestsSlicer";
-import userAuth from "./reducers/userSlicer";
-import extraReducer from "./reducers/extraSlicer";
+import extraReducer from "./reducers/extra-slicer";
+import timeSheets from "./reducers/time-sheets-slicer";
+import userBGVReducer from "./reducers/user-bgv-slicer";
+import userRequests from "./reducers/user-requests-slicer";
+import userAuth from "./reducers/user-slicer";
 
 const persistConfig = {
   key: "root",
