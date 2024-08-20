@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "requests",
+  "info": {
+    "singularName": "request",
+    "pluralName": "requests",
+    "displayName": "Request"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "requests"
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "start_date": {
+      "type": "date",
+      "required": true
+    },
+    "end_date": {
+      "type": "date"
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "reason": {
+      "type": "text",
+      "required": false
+    },
+    "details": {
+      "type": "text"
+    },
+    "requested_to": {
+      "type": "string",
+      "required": true
+    },
+    "date_handled": {
+      "type": "date",
+      "required": false
+    },
+    "date_requested": {
+      "type": "date",
+      "required": true
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_holidays",
+  "info": {
+    "singularName": "user-holiday",
+    "pluralName": "user-holidays",
+    "displayName": "UserHoliday",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "user_holidays"
+    },
+    "holidays": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::holiday.holiday"
+    }
+  }
+}

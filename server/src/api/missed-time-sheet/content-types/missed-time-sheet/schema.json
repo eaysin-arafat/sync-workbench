@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "missed_time_sheets",
+  "info": {
+    "singularName": "missed-time-sheet",
+    "pluralName": "missed-time-sheets",
+    "displayName": "MissedTimeSheet"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "missed_time_sheets"
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "hours_missed": {
+      "required": true,
+      "type": "integer"
+    },
+    "reason": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

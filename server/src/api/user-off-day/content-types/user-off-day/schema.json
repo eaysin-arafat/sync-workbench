@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_off_days",
+  "info": {
+    "singularName": "user-off-day",
+    "pluralName": "user-off-days",
+    "displayName": "UserOffDay"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "user_off_days"
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "reason": {
+      "type": "text"
+    }
+  }
+}

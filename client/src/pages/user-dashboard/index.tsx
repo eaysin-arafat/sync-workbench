@@ -8,9 +8,6 @@ import TimeOff from "@/assets/Icons/TimeOff";
 import TimeSheet from "@/assets/Icons/TimeSheet";
 import CompanyCard from "@/component/dashboard/company-card";
 import MainCard from "@/component/ui/card";
-import SingleListTimeSheet from "./SingleListTimeSheet";
-import SingleRequestList from "./SingleRequestList";
-import SingleTimesheetDay from "./SingleTimesheetDay";
 
 const timeSheetListDropdown = ["Day", "Week", "Month"];
 const requestListDropdown = [
@@ -92,7 +89,7 @@ const UserDashboard = () => {
   return (
     <div className="flex flex-col py-8 mt-8">
       <div className="grid md:grid-cols-10 gap-6 mb-[40px]">
-        <MainCard className="col-span-3 md:col-span-5 lg:col-span-3">
+        <MainCard className="col-span-3 md:col-span-5 lg:col-span-3 px-10">
           <h3 className="text-base mb-5 flex items-center gap-1.5 justify-center">
             TimeOff <TimeOff />
           </h3>
@@ -103,7 +100,7 @@ const UserDashboard = () => {
           </div>
         </MainCard>
 
-        <MainCard className="col-span-3 md:col-span-5 lg:col-span-3">
+        <MainCard className="col-span-3 md:col-span-5 lg:col-span-3 px-7">
           <h3 className="text-base flex items-center gap-1.5 justify-center mb-5">
             TimeSheets <TimeSheet />
           </h3>
@@ -114,7 +111,7 @@ const UserDashboard = () => {
           </div>
         </MainCard>
 
-        <MainCard className="col-span-3 md:col-span-4">
+        <MainCard className="col-span-3 md:col-span-4 px-10">
           <h3 className="text-base flex items-center gap-1.5 mb-5 justify-center">
             Requests <BsFillSendFill color="#FF0000" />
           </h3>
@@ -133,14 +130,14 @@ const UserDashboard = () => {
           </div>
           <div className="flex justify-evenly">
             <div className={`flex flex-col items-center justify-center gap-5`}>
-              <h2 className={`text-3xl font-semibold text-red-500`}>{200}</h2>
+              <h2 className={`text-xl text-red-500`}>{200}</h2>
 
               <h4 className="text-base">Timeshets</h4>
             </div>
             <div className={`flex flex-col items-center justify-center gap-5`}>
-              <h2 className={`text-3xl font-semibold text-red-500`}>{0}</h2>
+              <h2 className={`text-xl text-red-500`}>{0}</h2>
 
-              <h4 className="text-base">Hours</h4>
+              <h4 className="text-sm">Hours</h4>
             </div>
           </div>
         </MainCard>
@@ -166,30 +163,30 @@ const UserDashboard = () => {
             />
           </div>
         </div>
-        <div className="mt-5 relative">
+        {/* <div className="mt-5 relative">
           {typeof Array.from({ length: 10 })?.map === "function" &&
           selectedTimesheetType === "Day"
-            ? Array.from({ length: 10 })?.map((timeSheet: any) => (
-                <div className="mb-5" key={timeSheet.ID}>
-                  <SingleTimesheetDay data={timeSheet} reFetch={() => {}} />
+            ? Array.from({ length: 10 })?.map((item: any) => (
+                <div className="mb-5" key={Date.now()}>
+                  <SingleTimesheetDay data={{}} reFetch={() => {}} />
                 </div>
               ))
             : Object.keys(Array.from({ length: 10 }) || {}).map((key) => {
-                return Array.from({ length: 10 }).map((timeSheet: any) => (
-                  <div className="mb-5" key={timeSheet.ID}>
+                return Array.from({ length: 10 }).map((item: any) => (
+                  <div className="mb-5" key={Date.now()}>
                     <SingleListTimeSheet
                       type={selectedTimesheetType}
-                      key={timeSheet.ID}
-                      data={timeSheet}
+                      key={Date.now()}
+                      data={{}}
                       keyData={key}
                       reFetch={() => {}}
                     />
                   </div>
                 ));
               })}
-        </div>
+        </div> */}
       </div>
-      <div className="bg-white p-5 rounded-[15px] mt-5">
+      {/* <div className="bg-white p-5 rounded-[15px] mt-5">
         <div className="flex justify-between items-center">
           <h2 className="font-medium">Recent Requests</h2>
           <div className="w-[160px]">
@@ -215,7 +212,7 @@ const UserDashboard = () => {
             );
           })}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
