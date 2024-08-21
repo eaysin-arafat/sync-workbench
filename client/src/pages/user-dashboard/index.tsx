@@ -95,7 +95,7 @@ const UserDashboard = () => {
           </h3>
           <div className="flex items-center justify-between py-2">
             {timeoff.map((item) => (
-              <CompanyCard {...item} />
+              <CompanyCard key={item?.id} {...item} />
             ))}
           </div>
         </MainCard>
@@ -106,7 +106,7 @@ const UserDashboard = () => {
           </h3>
           <div className="flex items-center justify-between py-2">
             {timesheet.map((item) => (
-              <CompanyCard {...item} />
+              <CompanyCard key={item?.id} {...item} />
             ))}
           </div>
         </MainCard>
@@ -117,7 +117,7 @@ const UserDashboard = () => {
           </h3>
           <div className="flex items-center justify-between py-2">
             {requests.map((item) => (
-              <CompanyCard {...item} />
+              <CompanyCard key={item?.id} {...item} />
             ))}
           </div>
         </MainCard>

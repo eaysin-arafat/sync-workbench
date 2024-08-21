@@ -1,16 +1,20 @@
 import ChangePasswordIcon from "@/assets/account/ChangePasswordIcon";
 import LogoutIcon from "@/assets/account/LogoutIcon";
 import ManageAccountIcon from "@/assets/account/ManageAccount";
+import { logout } from "@/features/auth/auth-slice";
 import { Menu } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { MdAccountCircle } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const User = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleLogout = async () => {
     navigate("/");
+    dispatch(logout());
     notifications.show({
       color: "blue",
       title: "Success",

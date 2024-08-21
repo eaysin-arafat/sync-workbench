@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "commonjs",
+    "module": "ESNext",
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "lib": ["dom", "es2015", "es2017"],
@@ -11,10 +11,6 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    // "baseUrl": "./",
-    // "paths": {
-    //   "@components/*": ["src/components/*"]
-    // }
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*", "./*"]
