@@ -4,37 +4,38 @@
   "info": {
     "singularName": "project",
     "pluralName": "projects",
-    "displayName": "Project"
+    "displayName": "Project",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "project_name": {
       "type": "string",
       "required": true
     },
     "description": {
       "type": "text"
     },
-    "client": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::client.client",
-      "inversedBy": "projects"
-    },
     "start_date": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "end_date": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
-    "time_sheets": {
+    "department_id": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::time-sheet.time-sheet",
-      "mappedBy": "project"
+      "relation": "oneToOne",
+      "target": "api::department.department"
+    },
+    "manager_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
     }
   }
 }

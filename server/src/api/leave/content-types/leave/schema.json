@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "leaves",
+  "info": {
+    "singularName": "leave",
+    "pluralName": "leaves",
+    "displayName": "Leave",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "leave_type": {
+      "type": "string",
+      "required": true
+    },
+    "start_date": {
+      "type": "date",
+      "required": true
+    },
+    "end_date": {
+      "type": "date",
+      "required": true
+    },
+    "reason": {
+      "type": "text",
+      "required": true
+    },
+    "status": {
+      "type": "string"
+    },
+    "employee_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "leaves"
+    }
+  }
+}

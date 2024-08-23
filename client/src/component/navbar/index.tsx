@@ -1,70 +1,61 @@
-import {
-  URLApplications,
-  URLDashboard,
-  URLRequests,
-  URLTimeSheets,
-} from "@/routes/router-link";
-import { getUserRole, Role } from "@/utils/get-role";
-import { Link, useLocation } from "react-router-dom";
-import logo from "../../assets/logo.png";
+import { MdLegendToggle } from "react-icons/md";
+import DarkModeSwitcher from "./dark-mode-switcher";
+import DropdownMessage from "./message";
+import DropdownNotification from "./notification";
 import User from "./user";
-import UserNotifications from "./user-notifications";
 
-interface NavLink {
-  label: string;
-  path?: string;
-}
-const Navbar = () => {
-  const role: Role = getUserRole();
-
-  const location = useLocation();
-  const navLinks: NavLink[] = [
-    {
-      label: "Dashboard",
-      path: URLDashboard(),
-    },
-    { label: "TimeSheets", path: URLTimeSheets() },
-    { label: "Requests", path: URLRequests() },
-  ];
-
-  if (role === "admin") {
-    navLinks.push({ label: "Applications", path: URLApplications() });
-  }
-
-  const isActive = (path?: string) => {
-    if (!path) return false;
-    return location.pathname === path || location.pathname.startsWith(path);
-  };
-
+const Navbar = ({
+  toggleSidebar,
+}: {
+  toggleSidebar: () => void;
+  sidebarOpen: boolean;
+}) => {
   return (
-    <nav className="flex items-center justify-between px-11 py-5 sticky top-0 bg-white z-50">
-      <div className="flex items-center">
-        <img src={logo} alt="Logo" height={55} width={175} />
+    <nav className="flex flex-grow bg-white z-50 py-3 border-b border-stroke">
+      <div
+        className={`flex justify-start items-center transition-all duration-300 ease-in-out lg:w-[290px] ml-[14px]`}
+      >
+        <MdLegendToggle
+          size={33}
+          className="hover:bg-slate-200 cursor-pointer p-1.5"
+          onClick={toggleSidebar}
+        />
       </div>
 
-      <ul className="hidden md:flex space-x-4">
-        {navLinks.map((navLink) => (
-          <li key={navLink.label} className="flex flex-col">
-            <Link
-              to={navLink.path || "#"}
-              className={`px-3 py-0.5 font-medium text-black ${
-                isActive(navLink.path) ? "text-red-600" : ""
-              }`}
+      <div className="flex items-center justify-between space-x-5 w-full px-4 md:px-10">
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg
+              className="w-4 h-4 text-gray-500"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 20 20"
             >
-              {navLink.label}
-            </Link>
-            <span
-              className={
-                isActive(navLink.path) ? "bg-red-500 h-1 rounded-lg w-full" : ""
-              }
-            ></span>
-          </li>
-        ))}
-      </ul>
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+              />
+            </svg>
+            <span className="sr-only">Search icon</span>
+          </div>
+          <input
+            type="text"
+            id="search-navbar"
+            className="block w-full p-2 pl-10 text-sm text-gray-900 border border-stroke rounded-lg bg-gray-50 focus:outline-none"
+            placeholder="Search..."
+          />
+        </div>
 
-      <div className="flex items-center space-x-16">
-        <UserNotifications />
-        <User />
+        <div className="flex items-center justify-center space-x-5">
+          <DarkModeSwitcher />
+          <DropdownNotification />
+          <DropdownMessage />
+          <User />
+        </div>
       </div>
     </nav>
   );

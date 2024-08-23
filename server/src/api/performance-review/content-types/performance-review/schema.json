@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "performance_reviews",
+  "info": {
+    "singularName": "performance-review",
+    "pluralName": "performance-reviews",
+    "displayName": "Performance_Review"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "employee_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "performance_reviews"
+    },
+    "review_date": {
+      "type": "date",
+      "required": true
+    },
+    "review_period_start": {
+      "type": "date"
+    },
+    "review_period_end": {
+      "type": "date",
+      "required": true
+    },
+    "reviewer_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "performance_review"
+    },
+    "overall_rating": {
+      "type": "integer",
+      "required": true
+    },
+    "comments": {
+      "type": "text"
+    }
+  }
+}

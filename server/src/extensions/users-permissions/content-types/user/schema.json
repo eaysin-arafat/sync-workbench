@@ -65,75 +65,129 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "firstName": {
+    "first_name": {
       "type": "string",
       "required": true
     },
-    "lastName": {
+    "last_name": {
       "type": "string",
       "required": true
     },
-    "department": {
+    "phone_number": {
+      "required": true,
+      "type": "integer"
+    },
+    "date_of_birth": {
+      "type": "date"
+    },
+    "address": {
+      "type": "text",
+      "required": true
+    },
+    "city": {
       "type": "string",
       "required": true
     },
-    "designation": {
+    "state": {
       "type": "string",
       "required": true
     },
-    "dateOfJoining": {
+    "country": {
+      "type": "string",
+      "required": true
+    },
+    "zip_code": {
+      "type": "integer",
+      "required": true
+    },
+    "date_of_hire": {
       "type": "date",
       "required": true
     },
-    "status": {
+    "job_title": {
       "type": "string",
       "required": true
     },
-    "profilePicture": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
+    "department_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::department.department"
+    },
+    "manager_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "position_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::application-role.application-role"
+    },
+    "salary": {
+      "type": "biginteger"
+    },
+    "employment_status": {
+      "type": "string",
+      "required": true
+    },
+    "profile_picture": {
       "allowedTypes": [
         "images"
-      ]
+      ],
+      "type": "media",
+      "multiple": false
     },
-    "phone": {
+    "employee_status": {
       "type": "string",
       "required": true
     },
-    "address": {
-      "type": "string",
-      "required": false
-    },
-    "user_off_days": {
+    "attendances": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::user-off-day.user-off-day",
-      "mappedBy": "users_permissions_user"
+      "target": "api::attendance.attendance",
+      "mappedBy": "employee_id"
     },
-    "user_holidays": {
+    "leaves": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::user-holiday.user-holiday",
-      "mappedBy": "users_permissions_user"
+      "target": "api::leave.leave",
+      "mappedBy": "employee_id"
     },
-    "requests": {
+    "performance_reviews": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::request.request",
-      "mappedBy": "users_permissions_user"
+      "target": "api::performance-review.performance-review",
+      "mappedBy": "employee_id"
     },
-    "time_sheets": {
+    "performance_review": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::performance-review.performance-review",
+      "mappedBy": "reviewer_id"
+    },
+    "document": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::document.document",
+      "mappedBy": "employee_id"
+    },
+    "employee_skill": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee-skill.employee-skill",
+      "mappedBy": "employee_id"
+    },
+    "employee_permissions": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::time-sheet.time-sheet",
-      "mappedBy": "users_permissions_user"
+      "target": "api::employee-permission.employee-permission",
+      "mappedBy": "employee_id"
     },
-    "missed_time_sheets": {
+    "employee_certifications": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::missed-time-sheet.missed-time-sheet",
-      "mappedBy": "users_permissions_user"
+      "target": "api::employee-certification.employee-certification",
+      "mappedBy": "employee_id"
     }
   }
 }

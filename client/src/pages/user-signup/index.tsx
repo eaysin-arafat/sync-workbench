@@ -41,7 +41,7 @@ const UserSignUp = () => {
         <div className="flex flex-col items-center justify-center w-full mt-10">
           <div className="flex flex-col justify-start space-y-5">
             <Checkbox label="I agree to terms & conditions" color="black" />
-            <button className="bg-black px-40 rounded-md text-white py-3">
+            <button className="bg-black px-40 rounded-md text-white py-2">
               Create Account{" "}
             </button>
           </div>

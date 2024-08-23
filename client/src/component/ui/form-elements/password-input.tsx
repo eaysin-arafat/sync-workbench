@@ -10,6 +10,7 @@ type Props = {
   placeholder?: string;
   id?: string;
   width?: string;
+  className?: string;
   height?: string;
 };
 
@@ -25,11 +26,13 @@ const PasswordInput = (props: Props) => {
     id,
     width,
     height,
+    className,
   } = props;
 
   return (
     <MantinePasswordInput
       name={name}
+      className={className}
       id={id}
       value={value}
       label={label ?? "Password"}

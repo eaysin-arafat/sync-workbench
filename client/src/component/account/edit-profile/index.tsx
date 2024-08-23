@@ -7,7 +7,7 @@ const EditProfile = ({ signInData }: { signInData: any }) => {
   return (
     <>
       <form
-        className="flex gap-8"
+        className="flex flex-col lg:flex-row gap-8"
         onSubmit={(e) => {
           e.preventDefault();
         }}
@@ -23,8 +23,8 @@ const EditProfile = ({ signInData }: { signInData: any }) => {
         </div>
 
         <div>
-          <div className="px-5 py-5 space-y-5 w-[800px]">
-            <div className="grid grid-cols-2 gap-5">
+          <div className="space-y-5">
+            <div className="grid lg:grid-cols-2 gap-5">
               <FormInput
                 label="First Name"
                 value={signInData?.FirstName}

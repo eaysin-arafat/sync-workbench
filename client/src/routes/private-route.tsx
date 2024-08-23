@@ -4,22 +4,24 @@ import RootLayout from "@/layout/RootLayout";
 import Account from "@/pages/account";
 import AddUsers from "@/pages/add-users";
 import Applications from "@/pages/applications";
-import BgvReport from "@/pages/bgv-report";
+import Calendar from "@/pages/calendar";
+import Dashboard from "@/pages/dashboard";
 import DeleteUsers from "@/pages/delete-users";
+import Profile from "@/pages/profile";
 import Requests from "@/pages/request";
 import RequestsView from "@/pages/requests-view";
 import Terms from "@/pages/terms";
 import TimeSheets from "@/pages/time-sheets";
 import TimeSheetsView from "@/pages/time-sheets-view";
-import UserDashboard from "@/pages/user-dashboard";
 import UserInfo from "@/pages/user-info.tsx";
 import { RouteObject } from "react-router-dom";
 import {
+  getCalendarLink,
+  getDashboardLink,
+  getUserProfileLink,
   URLAccount,
   URLAddUsers,
   URLApplications,
-  URLBGVReport,
-  URLDashboard,
   URLDeleteUsers,
   URLRequests,
   URLRequestsView,
@@ -37,7 +39,7 @@ const privateRoute: RouteObject[] = [
       {
         element: <RootLayout />,
         children: [
-          { path: URLDashboard(), element: <UserDashboard /> },
+          { path: getDashboardLink(), element: <Dashboard /> },
           {
             path: URLTimeSheets(),
             element: <TimeSheets />,
@@ -83,8 +85,12 @@ const privateRoute: RouteObject[] = [
             element: <DeleteUsers />,
           },
           {
-            path: URLBGVReport(),
-            element: <BgvReport />,
+            path: getUserProfileLink(),
+            element: <Profile />,
+          },
+          {
+            path: getCalendarLink(),
+            element: <Calendar />,
           },
         ],
       },

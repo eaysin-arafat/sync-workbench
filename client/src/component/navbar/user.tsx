@@ -27,13 +27,13 @@ const User = () => {
     <div className="flex items-center gap-2">
       <Menu shadow="md" width={200}>
         <Menu.Target>
-          <div className="flex items-center gap-4 cursor-pointer">
-            <MdAccountCircle size={35} />
-
+          <div className="flex items-center gap-3 cursor-pointer">
             <div className="flex flex-col items-start">
               <p className="text-sm font-semibold">{"Eaysin"}</p>
               <p className="text-xs font-medium capitalize">{"User"}</p>
             </div>
+
+            <MdAccountCircle size={28} />
           </div>
         </Menu.Target>
 

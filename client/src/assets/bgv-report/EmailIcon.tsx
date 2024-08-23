@@ -10,16 +10,16 @@ const EmailIcon = () => {
       <path
         d="M3 1H15C15.825 1 16.5 1.675 16.5 2.5V11.5C16.5 12.325 15.825 13 15 13H3C2.175 13 1.5 12.325 1.5 11.5V2.5C1.5 1.675 2.175 1 3 1Z"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M16.5 2.5L9 7.75L1.5 2.5"
         stroke="black"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

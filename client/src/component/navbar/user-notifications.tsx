@@ -68,8 +68,8 @@ const UserNotifications = () => {
       <Menu shadow="md" width={304}>
         <Menu.Target>
           <div className="cursor-pointer">
-            <IoIosNotifications size={25} />
-            <span className="absolute flex items-center justify-center bg-red-600 h-[12px] w-[12px] text-[8px] text-white rounded-full top-0 right-0">
+            <IoIosNotifications size={28} />
+            <span className="absolute flex items-center justify-center bg-red-600 font-semibold h-[15px] w-[15px] text-[9px] text-white rounded-full top-0 right-0">
               5
             </span>
           </div>

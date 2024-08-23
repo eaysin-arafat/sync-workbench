@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "skills",
+  "info": {
+    "singularName": "skill",
+    "pluralName": "skills",
+    "displayName": "Skill",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "skill_name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "employee_skill": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee-skill.employee-skill",
+      "inversedBy": "skill_ids"
+    }
+  }
+}
