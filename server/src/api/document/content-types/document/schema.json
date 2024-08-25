@@ -30,9 +30,9 @@
     },
     "employee_id": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "document"
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "documents"
     }
   }
 }

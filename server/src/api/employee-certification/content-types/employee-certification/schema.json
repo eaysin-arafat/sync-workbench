@@ -4,7 +4,7 @@
   "info": {
     "singularName": "employee-certification",
     "pluralName": "employee-certifications",
-    "displayName": "Employee_Certification",
+    "displayName": "EmployeeCertification",
     "description": ""
   },
   "options": {
@@ -14,8 +14,9 @@
   "attributes": {
     "certification_id": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::certification.certification"
+      "relation": "manyToOne",
+      "target": "api::certification.certification",
+      "inversedBy": "employee_certifications"
     },
     "obtained_date": {
       "type": "date",
@@ -28,7 +29,7 @@
     "employee_id": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
+      "target": "api::employee.employee",
       "inversedBy": "employee_certifications"
     }
   }

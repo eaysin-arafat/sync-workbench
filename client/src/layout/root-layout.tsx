@@ -11,10 +11,8 @@ const RootLayout = () => {
     <div className="bg-[#FAFAFB] h-screen flex flex-col">
       <Navbar toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
       <div className="flex flex-grow overflow-hidden">
-        <div className="h-screen">
-          <Sidebar sidebarOpen={sidebarOpen} />
-        </div>
-        <main className="px-5 w-full border border-stroke border-t-0 py-6 overflow-auto">
+        <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+        <main className="px-3 md:px-6 w-full border border-stroke border-t-0 py-6 overflow-auto">
           <Outlet />
         </main>
       </div>

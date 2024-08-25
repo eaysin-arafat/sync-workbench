@@ -32,13 +32,15 @@
     },
     "assigned_to": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "tasks"
     },
     "project_id": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::project.project"
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "tasks"
     }
   }
 }

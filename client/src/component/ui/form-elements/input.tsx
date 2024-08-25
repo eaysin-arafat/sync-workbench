@@ -40,15 +40,21 @@ const Input = (props: Props) => {
   } = props;
 
   return (
-    <MantineInput.Wrapper label={label} withAsterisk={required} error={errMsg}>
+    <MantineInput.Wrapper
+      label={label}
+      withAsterisk={required}
+      error={errMsg}
+      styles={{ root: { width: "100%" } }}
+    >
       <MantineInput
         placeholder={placeholder ? placeholder : `Type ${label}`}
         value={value}
         styles={{
           input: {
-            height: height ? height : "45px",
-            width: width,
+            height: height ? `${height}px` : "45px",
+            width: `${width}px`,
             backgroundColor: backgroundColor,
+            borderColor: "#E2E8F0",
           },
         }}
         id={id}

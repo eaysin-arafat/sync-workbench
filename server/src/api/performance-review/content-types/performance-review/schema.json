@@ -4,19 +4,14 @@
   "info": {
     "singularName": "performance-review",
     "pluralName": "performance-reviews",
-    "displayName": "Performance_Review"
+    "displayName": "PerformanceReview",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "employee_id": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "performance_reviews"
-    },
     "review_date": {
       "type": "date",
       "required": true
@@ -30,9 +25,9 @@
     },
     "reviewer_id": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "performance_review"
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "performance_reviews"
     },
     "overall_rating": {
       "type": "integer",

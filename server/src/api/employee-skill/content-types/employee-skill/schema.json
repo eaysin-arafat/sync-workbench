@@ -4,7 +4,7 @@
   "info": {
     "singularName": "employee-skill",
     "pluralName": "employee-skills",
-    "displayName": "Employee_Skill",
+    "displayName": "EmployeeSkill",
     "description": ""
   },
   "options": {
@@ -17,15 +17,15 @@
     },
     "employee_id": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "employee_skill"
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "employee_skills"
     },
-    "skill_ids": {
+    "skill_id": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::skill.skill",
-      "mappedBy": "employee_skill"
+      "inversedBy": "employee_skills"
     }
   }
 }

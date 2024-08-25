@@ -19,18 +19,6 @@
     },
     "description": {
       "type": "text"
-    },
-    "payroll": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::payroll.payroll",
-      "mappedBy": "employee_id"
-    },
-    "employee_access_control": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::employee-permission.employee-permission",
-      "inversedBy": "access_control_id"
     }
   }
 }

@@ -7,16 +7,17 @@
 
 ::-webkit-scrollbar {
   width: 6px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
   background: #fcfcfc;
-  border-radius: 5px;
+  border-radius: 0px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: rgb(223, 223, 223);
-  border-radius: 24px;
+  border-radius: 0px;
 }
 
 ::-webkit-scrollbar-thumb {

@@ -34,7 +34,7 @@
     "employee_id": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
+      "target": "api::employee.employee",
       "inversedBy": "leaves"
     }
   }

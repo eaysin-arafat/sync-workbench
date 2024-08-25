@@ -20,11 +20,11 @@
     "description": {
       "type": "text"
     },
-    "employee_skill": {
+    "employee_skills": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "oneToMany",
       "target": "api::employee-skill.employee-skill",
-      "inversedBy": "skill_ids"
+      "mappedBy": "skill_id"
     }
   }
 }

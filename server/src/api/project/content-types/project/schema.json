@@ -29,13 +29,21 @@
     },
     "department_id": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::department.department"
+      "relation": "manyToOne",
+      "target": "api::department.department",
+      "inversedBy": "projects"
+    },
+    "tasks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::task.task",
+      "mappedBy": "project_id"
     },
     "manager_id": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "projects"
     }
   }
 }

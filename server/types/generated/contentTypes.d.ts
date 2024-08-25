@@ -732,66 +732,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     state: Attribute.String & Attribute.Required;
     country: Attribute.String & Attribute.Required;
     zip_code: Attribute.Integer & Attribute.Required;
-    date_of_hire: Attribute.Date & Attribute.Required;
-    job_title: Attribute.String & Attribute.Required;
-    department_id: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'api::department.department'
-    >;
-    manager_id: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    position_id: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'api::application-role.application-role'
-    >;
-    salary: Attribute.BigInteger;
-    employment_status: Attribute.String & Attribute.Required;
     profile_picture: Attribute.Media<'images'>;
-    employee_status: Attribute.String & Attribute.Required;
-    attendances: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::attendance.attendance'
-    >;
-    leaves: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::leave.leave'
-    >;
-    performance_reviews: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::performance-review.performance-review'
-    >;
-    performance_review: Attribute.Relation<
+    employee_id: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToOne',
-      'api::performance-review.performance-review'
-    >;
-    document: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'api::document.document'
-    >;
-    employee_skill: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToOne',
-      'api::employee-skill.employee-skill'
-    >;
-    employee_permissions: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::employee-permission.employee-permission'
-    >;
-    employee_certifications: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::employee-certification.employee-certification'
+      'api::employee.employee'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -873,16 +818,6 @@ export interface ApiAccessControlAccessControl extends Schema.CollectionType {
       Attribute.Required &
       Attribute.Unique;
     description: Attribute.Text;
-    payroll: Attribute.Relation<
-      'api::access-control.access-control',
-      'oneToOne',
-      'api::payroll.payroll'
-    >;
-    employee_access_control: Attribute.Relation<
-      'api::access-control.access-control',
-      'manyToOne',
-      'api::employee-permission.employee-permission'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -915,6 +850,11 @@ export interface ApiApplicationRoleApplicationRole
   };
   attributes: {
     position_name: Attribute.String & Attribute.Required & Attribute.Unique;
+    employees: Attribute.Relation<
+      'api::application-role.application-role',
+      'oneToMany',
+      'api::employee.employee'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -949,10 +889,10 @@ export interface ApiAttendanceAttendance extends Schema.CollectionType {
     check_in_time: Attribute.String & Attribute.Required;
     check_out_time: Attribute.String & Attribute.Required;
     status: Attribute.String & Attribute.Required;
-    employee_id: Attribute.Relation<
+    employee: Attribute.Relation<
       'api::attendance.attendance',
       'manyToOne',
-      'plugin::users-permissions.user'
+      'api::employee.employee'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -990,6 +930,11 @@ export interface ApiCertificationCertification extends Schema.CollectionType {
     issuing_organization: Attribute.String & Attribute.Required;
     issue_date: Attribute.Date & Attribute.Required;
     expiry_date: Attribute.Date;
+    employee_certifications: Attribute.Relation<
+      'api::certification.certification',
+      'oneToMany',
+      'api::employee-certification.employee-certification'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1024,8 +969,18 @@ export interface ApiDepartmentDepartment extends Schema.CollectionType {
     location: Attribute.String;
     manager_id: Attribute.Relation<
       'api::department.department',
-      'oneToOne',
-      'plugin::users-permissions.user'
+      'manyToOne',
+      'api::employee.employee'
+    >;
+    employees: Attribute.Relation<
+      'api::department.department',
+      'oneToMany',
+      'api::employee.employee'
+    >;
+    projects: Attribute.Relation<
+      'api::department.department',
+      'oneToMany',
+      'api::project.project'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1063,8 +1018,8 @@ export interface ApiDocumentDocument extends Schema.CollectionType {
     upload_date: Attribute.Date & Attribute.Required;
     employee_id: Attribute.Relation<
       'api::document.document',
-      'oneToOne',
-      'plugin::users-permissions.user'
+      'manyToOne',
+      'api::employee.employee'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1084,13 +1039,127 @@ export interface ApiDocumentDocument extends Schema.CollectionType {
   };
 }
 
+export interface ApiEmployeeEmployee extends Schema.CollectionType {
+  collectionName: 'employees';
+  info: {
+    singularName: 'employee';
+    pluralName: 'employees';
+    displayName: 'Employee';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    date_of_hire: Attribute.Date;
+    job_title: Attribute.String & Attribute.Required;
+    department_id: Attribute.Relation<
+      'api::employee.employee',
+      'manyToOne',
+      'api::department.department'
+    >;
+    position_id: Attribute.Relation<
+      'api::employee.employee',
+      'manyToOne',
+      'api::application-role.application-role'
+    >;
+    salary: Attribute.BigInteger & Attribute.Required;
+    employment_status: Attribute.String & Attribute.Required;
+    profile_picture: Attribute.Media<'images', true>;
+    employee_status: Attribute.String & Attribute.Required;
+    is_internship: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    attendances: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::attendance.attendance'
+    >;
+    documents: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::document.document'
+    >;
+    manager_id: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::employee.employee'
+    >;
+    employee: Attribute.Relation<
+      'api::employee.employee',
+      'manyToOne',
+      'api::employee.employee'
+    >;
+    departments: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::department.department'
+    >;
+    projects: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::project.project'
+    >;
+    tasks: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::task.task'
+    >;
+    leaves: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::leave.leave'
+    >;
+    performance_reviews: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::performance-review.performance-review'
+    >;
+    payrolls: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::payroll.payroll'
+    >;
+    employee_skills: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::employee-skill.employee-skill'
+    >;
+    employee_certifications: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::employee-certification.employee-certification'
+    >;
+    user_info: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::employee.employee',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiEmployeeCertificationEmployeeCertification
   extends Schema.CollectionType {
   collectionName: 'employee_certifications';
   info: {
     singularName: 'employee-certification';
     pluralName: 'employee-certifications';
-    displayName: 'Employee_Certification';
+    displayName: 'EmployeeCertification';
     description: '';
   };
   options: {
@@ -1099,7 +1168,7 @@ export interface ApiEmployeeCertificationEmployeeCertification
   attributes: {
     certification_id: Attribute.Relation<
       'api::employee-certification.employee-certification',
-      'oneToOne',
+      'manyToOne',
       'api::certification.certification'
     >;
     obtained_date: Attribute.Date & Attribute.Required;
@@ -1107,7 +1176,7 @@ export interface ApiEmployeeCertificationEmployeeCertification
     employee_id: Attribute.Relation<
       'api::employee-certification.employee-certification',
       'manyToOne',
-      'plugin::users-permissions.user'
+      'api::employee.employee'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1140,16 +1209,6 @@ export interface ApiEmployeePermissionEmployeePermission
     draftAndPublish: true;
   };
   attributes: {
-    employee_id: Attribute.Relation<
-      'api::employee-permission.employee-permission',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    access_control_id: Attribute.Relation<
-      'api::employee-permission.employee-permission',
-      'oneToMany',
-      'api::access-control.access-control'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1173,7 +1232,7 @@ export interface ApiEmployeeSkillEmployeeSkill extends Schema.CollectionType {
   info: {
     singularName: 'employee-skill';
     pluralName: 'employee-skills';
-    displayName: 'Employee_Skill';
+    displayName: 'EmployeeSkill';
     description: '';
   };
   options: {
@@ -1183,12 +1242,12 @@ export interface ApiEmployeeSkillEmployeeSkill extends Schema.CollectionType {
     proficiency_level: Attribute.String;
     employee_id: Attribute.Relation<
       'api::employee-skill.employee-skill',
-      'oneToOne',
-      'plugin::users-permissions.user'
+      'manyToOne',
+      'api::employee.employee'
     >;
-    skill_ids: Attribute.Relation<
+    skill_id: Attribute.Relation<
       'api::employee-skill.employee-skill',
-      'oneToMany',
+      'manyToOne',
       'api::skill.skill'
     >;
     createdAt: Attribute.DateTime;
@@ -1229,7 +1288,7 @@ export interface ApiLeaveLeave extends Schema.CollectionType {
     employee_id: Attribute.Relation<
       'api::leave.leave',
       'manyToOne',
-      'plugin::users-permissions.user'
+      'api::employee.employee'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1268,8 +1327,8 @@ export interface ApiPayrollPayroll extends Schema.CollectionType {
     status: Attribute.String & Attribute.Required;
     employee_id: Attribute.Relation<
       'api::payroll.payroll',
-      'oneToOne',
-      'api::access-control.access-control'
+      'manyToOne',
+      'api::employee.employee'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1295,24 +1354,20 @@ export interface ApiPerformanceReviewPerformanceReview
   info: {
     singularName: 'performance-review';
     pluralName: 'performance-reviews';
-    displayName: 'Performance_Review';
+    displayName: 'PerformanceReview';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    employee_id: Attribute.Relation<
-      'api::performance-review.performance-review',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
     review_date: Attribute.Date & Attribute.Required;
     review_period_start: Attribute.Date;
     review_period_end: Attribute.Date & Attribute.Required;
     reviewer_id: Attribute.Relation<
       'api::performance-review.performance-review',
-      'oneToOne',
-      'plugin::users-permissions.user'
+      'manyToOne',
+      'api::employee.employee'
     >;
     overall_rating: Attribute.Integer & Attribute.Required;
     comments: Attribute.Text;
@@ -1352,13 +1407,18 @@ export interface ApiProjectProject extends Schema.CollectionType {
     end_date: Attribute.Date & Attribute.Required;
     department_id: Attribute.Relation<
       'api::project.project',
-      'oneToOne',
+      'manyToOne',
       'api::department.department'
+    >;
+    tasks: Attribute.Relation<
+      'api::project.project',
+      'oneToMany',
+      'api::task.task'
     >;
     manager_id: Attribute.Relation<
       'api::project.project',
-      'oneToOne',
-      'plugin::users-permissions.user'
+      'manyToOne',
+      'api::employee.employee'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1392,9 +1452,9 @@ export interface ApiSkillSkill extends Schema.CollectionType {
   attributes: {
     skill_name: Attribute.String & Attribute.Required & Attribute.Unique;
     description: Attribute.Text;
-    employee_skill: Attribute.Relation<
+    employee_skills: Attribute.Relation<
       'api::skill.skill',
-      'manyToOne',
+      'oneToMany',
       'api::employee-skill.employee-skill'
     >;
     createdAt: Attribute.DateTime;
@@ -1434,12 +1494,12 @@ export interface ApiTaskTask extends Schema.CollectionType {
     due_date: Attribute.Date;
     assigned_to: Attribute.Relation<
       'api::task.task',
-      'oneToOne',
-      'plugin::users-permissions.user'
+      'manyToOne',
+      'api::employee.employee'
     >;
     project_id: Attribute.Relation<
       'api::task.task',
-      'oneToOne',
+      'manyToOne',
       'api::project.project'
     >;
     createdAt: Attribute.DateTime;
@@ -1476,6 +1536,7 @@ declare module '@strapi/types' {
       'api::certification.certification': ApiCertificationCertification;
       'api::department.department': ApiDepartmentDepartment;
       'api::document.document': ApiDocumentDocument;
+      'api::employee.employee': ApiEmployeeEmployee;
       'api::employee-certification.employee-certification': ApiEmployeeCertificationEmployeeCertification;
       'api::employee-permission.employee-permission': ApiEmployeePermissionEmployeePermission;
       'api::employee-skill.employee-skill': ApiEmployeeSkillEmployeeSkill;

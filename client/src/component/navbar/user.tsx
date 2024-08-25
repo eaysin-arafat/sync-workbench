@@ -28,7 +28,7 @@ const User = () => {
       <Menu shadow="md" width={200}>
         <Menu.Target>
           <div className="flex items-center gap-3 cursor-pointer">
-            <div className="flex flex-col items-start">
+            <div className="lg:flex flex-col items-start hidden">
               <p className="text-sm font-semibold">{"Eaysin"}</p>
               <p className="text-xs font-medium capitalize">{"User"}</p>
             </div>

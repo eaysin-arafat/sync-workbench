@@ -1,0 +1,137 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employees",
+  "info": {
+    "singularName": "employee",
+    "pluralName": "employees",
+    "displayName": "Employee",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "date_of_hire": {
+      "type": "date"
+    },
+    "job_title": {
+      "type": "string",
+      "required": true
+    },
+    "department_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::department.department",
+      "inversedBy": "employees"
+    },
+    "position_id": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::application-role.application-role",
+      "inversedBy": "employees"
+    },
+    "salary": {
+      "type": "biginteger",
+      "required": true
+    },
+    "employment_status": {
+      "type": "string",
+      "required": true
+    },
+    "profile_picture": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "employee_status": {
+      "type": "string",
+      "required": true
+    },
+    "is_internship": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "attendances": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attendance.attendance",
+      "mappedBy": "employee"
+    },
+    "documents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::document.document",
+      "mappedBy": "employee_id"
+    },
+    "manager_id": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employee.employee",
+      "mappedBy": "employee"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "manager_id"
+    },
+    "departments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::department.department",
+      "mappedBy": "manager_id"
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project.project",
+      "mappedBy": "manager_id"
+    },
+    "tasks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::task.task",
+      "mappedBy": "assigned_to"
+    },
+    "leaves": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::leave.leave",
+      "mappedBy": "employee_id"
+    },
+    "performance_reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::performance-review.performance-review",
+      "mappedBy": "reviewer_id"
+    },
+    "payrolls": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::payroll.payroll",
+      "mappedBy": "employee_id"
+    },
+    "employee_skills": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employee-skill.employee-skill",
+      "mappedBy": "employee_id"
+    },
+    "employee_certifications": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employee-certification.employee-certification",
+      "mappedBy": "employee_id"
+    },
+    "user_info": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

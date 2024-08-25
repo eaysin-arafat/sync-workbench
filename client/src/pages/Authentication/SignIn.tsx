@@ -49,7 +49,7 @@ const SignIn = () => {
   return (
     <>
       <div className="rounded-sm bg-white h-screen flex items-center justify-center">
-        <div className="flex flex-wrap items-center">
+        <div className="flex flex-wrap items-center h-full">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="py-17.5 px-26 text-center">
               <Link className="mb-5.5 inline-block" to="/">
@@ -187,14 +187,14 @@ const SignIn = () => {
             </div>
           </div>
 
-          <div className="w-full border-stroke xl:w-1/2 xl:border-l-2">
+          <div className="w-full flex items-center h-full border-stroke xl:w-1/2 xl:border-l-2">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <span className="mb-1.5 block font-medium">Start for free</span>
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
                 Sign In to Sync-Workbench
               </h2>
 
-              <form onSubmit={(e) => handleSignIn(e)} className="space-y-5">
+              <form onSubmit={(e) => handleSignIn(e)} className="space-y-4">
                 <div className="space-y-4">
                   <Input
                     label="Username"
@@ -214,8 +214,8 @@ const SignIn = () => {
                   />
                 </div>
 
-                {error && (
-                  <div className="grid gap-4 2xl:gap-6">
+                <div className="mb-5">
+                  {error && (
                     <div
                       role="alert"
                       className={
@@ -233,10 +233,8 @@ const SignIn = () => {
                         <FaTimes size={12} />
                       </button>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                <div className="mb-5">
                   <input
                     type="submit"
                     value="Sign In"

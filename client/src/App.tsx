@@ -5,6 +5,7 @@ import router from "./routes";
 
 function App() {
   const { isAuthChecking } = useAuthCheck();
+  // const isAuthChecking = true;
 
   return isAuthChecking ? <Loader /> : <RouterProvider router={router} />;
 }

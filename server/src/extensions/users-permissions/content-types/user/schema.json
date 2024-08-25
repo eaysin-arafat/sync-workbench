@@ -100,94 +100,18 @@
       "type": "integer",
       "required": true
     },
-    "date_of_hire": {
-      "type": "date",
-      "required": true
-    },
-    "job_title": {
-      "type": "string",
-      "required": true
-    },
-    "department_id": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::department.department"
-    },
-    "manager_id": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
-    },
-    "position_id": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::application-role.application-role"
-    },
-    "salary": {
-      "type": "biginteger"
-    },
-    "employment_status": {
-      "type": "string",
-      "required": true
-    },
     "profile_picture": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
-    "employee_status": {
-      "type": "string",
-      "required": true
-    },
-    "attendances": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::attendance.attendance",
-      "mappedBy": "employee_id"
-    },
-    "leaves": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::leave.leave",
-      "mappedBy": "employee_id"
-    },
-    "performance_reviews": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::performance-review.performance-review",
-      "mappedBy": "employee_id"
-    },
-    "performance_review": {
+    "employee_id": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::performance-review.performance-review",
-      "mappedBy": "reviewer_id"
-    },
-    "document": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::document.document",
-      "mappedBy": "employee_id"
-    },
-    "employee_skill": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::employee-skill.employee-skill",
-      "mappedBy": "employee_id"
-    },
-    "employee_permissions": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::employee-permission.employee-permission",
-      "mappedBy": "employee_id"
-    },
-    "employee_certifications": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::employee-certification.employee-certification",
-      "mappedBy": "employee_id"
+      "target": "api::employee.employee"
     }
   }
 }

@@ -14,7 +14,7 @@ const DropdownMessage = () => {
             setNotifying(false);
             setDropdownOpen(!dropdownOpen);
           }}
-          className="relative flex h-8.5 w-8.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
+          className="relative flex h-7.5 w-7.5 items-center justify-center rounded-full border-[0.5px] border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
           to="#"
         >
           <span
@@ -27,8 +27,8 @@ const DropdownMessage = () => {
 
           <svg
             className="fill-current duration-300 ease-in-out"
-            width="18"
-            height="18"
+            width="15"
+            height="15"
             viewBox="0 0 18 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

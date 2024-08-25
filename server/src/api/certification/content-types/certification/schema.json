@@ -28,6 +28,12 @@
     },
     "expiry_date": {
       "type": "date"
+    },
+    "employee_certifications": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employee-certification.employee-certification",
+      "mappedBy": "certification_id"
     }
   }
 }

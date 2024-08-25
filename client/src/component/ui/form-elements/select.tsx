@@ -13,6 +13,9 @@ type Props = {
   placeholder?: string;
   options?: string[];
   id?: string;
+  height?: string;
+  width?: string;
+  defaultValue?: string;
 };
 
 // Select input component
@@ -28,6 +31,9 @@ function Select({
   placeholder,
   options = [],
   id,
+  height,
+  width,
+  defaultValue,
 }: Props) {
   return (
     <MantineSelect
@@ -46,8 +52,16 @@ function Select({
       disabled={disabled}
       data={options}
       error={errMsg}
-      styles={{ input: { height: "45px" }, label: { fontSize: "15px" } }}
+      styles={{
+        root: { width: width ? `${width}` : "100%" },
+        input: {
+          height: height ? `${height}px` : "45px",
+          borderColor: "#E2E8F0",
+        },
+        label: { fontSize: "15px" },
+      }}
       searchable
+      defaultValue={defaultValue}
     />
   );
 }

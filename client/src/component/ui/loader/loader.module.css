@@ -1,72 +1,155 @@
-.crossLoader {
-  transform: rotateZ(45deg);
-  perspective: 1000px;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  color: var(--violetColor);
+.container {
+  --uib-size: 28;
+  --uib-color: black;
+  --uib-speed: 3.5s;
+  --uib-stroke: 4;
+  --uib-mult: calc(var(--uib-size) / var(--uib-stroke));
+  --uib-stroke-px: calc(var(--uib-stroke) * 1px);
+  --uib-size-px: calc(var(--uib-size) * 1px);
+  position: relative;
+  height: var(--uib-size-px);
+  width: var(--uib-size-px);
 }
-.crossLoader:before,
-.crossLoader:after {
-  content: "";
-  display: block;
+
+.line {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: inherit;
-  height: inherit;
-  border-radius: 50%;
-  transform: rotateX(70deg);
-  animation: 1s spin linear infinite;
-}
-.crossLoader:after {
-  color: var(--orangeColor);
-  transform: rotateY(70deg);
-  animation-delay: 0.4s;
+  top: calc(50% - var(--uib-stroke-px) / 2);
+  left: calc(50% - var(--uib-stroke-px) / 2);
+  width: var(--uib-stroke-px);
+  height: var(--uib-stroke-px);
+  background-color: var(--uib-color);
+  animation: center-line var(--uib-speed) ease infinite;
+  transition: background-color 0.3s ease;
 }
 
-@keyframes rotate {
-  0% {
-    transform: translate(-50%, -50%) rotateZ(0deg);
-  }
+.container::before,
+.container::after {
+  content: "";
+  position: absolute;
+  width: var(--uib-stroke-px);
+  height: var(--uib-stroke-px);
+  background-color: var(--uib-color);
+  animation: explore var(--uib-speed) ease infinite;
+  transition: background-color 0.3s ease;
+}
+
+.container::after {
+  animation-delay: calc(var(--uib-speed) * -0.5);
+}
+
+@keyframes center-line {
+  0%,
+  25%,
+  50%,
+  75%,
   100% {
-    transform: translate(-50%, -50%) rotateZ(360deg);
+    transform: scaleX(1) scaleY(1);
+  }
+  12.5%,
+  62.5% {
+    transform: scaleX(var(--uib-mult)) scaleY(1);
+  }
+  37.5%,
+  87.5% {
+    transform: scaleX(1) scaleY(var(--uib-mult));
   }
 }
 
-@keyframes rotateccw {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(-360deg);
-  }
-}
-
-@keyframes spin {
+@keyframes explore {
   0%,
   100% {
-    box-shadow: 0.2em 0px 0 0px currentcolor;
+    transform: scaleX(1) scaleY(1) translate(0%, 0%);
+    transform-origin: top left;
+    top: 0;
+    left: 0;
   }
-  12% {
-    box-shadow: 0.2em 0.2em 0 0 currentcolor;
+
+  12.5% {
+    transform: scaleX(var(--uib-mult)) scaleY(1) translate(0%, 0%);
+    transform-origin: top left;
+    top: 0;
+    left: 0;
   }
+
+  12.50001% {
+    transform: scaleX(var(--uib-mult)) scaleY(1) translate(0%, 0%);
+    transform-origin: top right;
+    top: 0;
+    left: initial;
+    right: 0;
+  }
+
   25% {
-    box-shadow: 0 0.2em 0 0px currentcolor;
+    transform: scaleX(1) scaleY(1) translate(0%, 0%);
+    transform-origin: top right;
+    top: 0;
+    left: initial;
+    right: 0;
   }
-  37% {
-    box-shadow: -0.2em 0.2em 0 0 currentcolor;
+
+  37.5% {
+    transform: scaleX(1) scaleY(var(--uib-mult)) translate(0%, 0%);
+    transform-origin: top right;
+    top: 0;
+    left: initial;
+    right: 0;
   }
+
+  37.5001% {
+    transform: scaleX(1) scaleY(var(--uib-mult)) translate(0%, 0%);
+    transform-origin: bottom right;
+    top: initial;
+    bottom: 0;
+    left: initial;
+    right: 0;
+  }
+
   50% {
-    box-shadow: -0.2em 0 0 0 currentcolor;
+    transform: scaleX(1) scaleY(1) translate(0%, 0%);
+    transform-origin: bottom right;
+    top: initial;
+    bottom: 0;
+    left: initial;
+    right: 0;
   }
-  62% {
-    box-shadow: -0.2em -0.2em 0 0 currentcolor;
+
+  62.5% {
+    transform: scaleX(var(--uib-mult)) scaleY(1) translate(0%, 0%);
+    transform-origin: bottom right;
+    top: initial;
+    bottom: 0;
+    left: initial;
+    right: 0;
   }
+
+  62.5001% {
+    transform: scaleX(var(--uib-mult)) scaleY(1) translate(0%, 0%);
+    transform-origin: bottom left;
+    top: initial;
+    bottom: 0;
+    left: 0;
+  }
+
   75% {
-    box-shadow: 0px -0.2em 0 0 currentcolor;
+    transform: scaleX(1) scaleY(1) translate(0%, 0%);
+    transform-origin: bottom left;
+    top: initial;
+    bottom: 0;
+    left: 0;
   }
-  87% {
-    box-shadow: 0.2em -0.2em 0 0 currentcolor;
+
+  87.5% {
+    transform: scaleX(1) scaleY(var(--uib-mult)) translate(0%, 0%);
+    transform-origin: bottom left;
+    top: initial;
+    bottom: 0;
+    left: 0;
+  }
+
+  87.5001% {
+    transform: scaleX(1) scaleY(var(--uib-mult)) translate(0%, 0%);
+    transform-origin: top left;
+    top: 0;
+    left: 0;
   }
 }

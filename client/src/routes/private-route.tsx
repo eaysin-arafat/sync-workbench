@@ -1,12 +1,13 @@
 import PrivateGuard from "@/component/guards/private-guard";
 import NewTimeSheetTemplateTwo from "@/component/time-sheets/new-timesheet-template-two";
-import RootLayout from "@/layout/RootLayout";
+import RootLayout from "@/layout/root-layout";
 import Account from "@/pages/account";
 import AddUsers from "@/pages/add-users";
 import Applications from "@/pages/applications";
 import Calendar from "@/pages/calendar";
 import Dashboard from "@/pages/dashboard";
 import DeleteUsers from "@/pages/delete-users";
+import Employee from "@/pages/employee";
 import Profile from "@/pages/profile";
 import Requests from "@/pages/request";
 import RequestsView from "@/pages/requests-view";
@@ -18,6 +19,7 @@ import { RouteObject } from "react-router-dom";
 import {
   getCalendarLink,
   getDashboardLink,
+  getEmployeeLink,
   getUserProfileLink,
   URLAccount,
   URLAddUsers,
@@ -91,6 +93,10 @@ const privateRoute: RouteObject[] = [
           {
             path: getCalendarLink(),
             element: <Calendar />,
+          },
+          {
+            path: getEmployeeLink(),
+            element: <Employee />,
           },
         ],
       },

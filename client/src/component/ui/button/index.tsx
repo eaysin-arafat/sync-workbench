@@ -26,11 +26,11 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    "font-medium rounded-md focus:outline-none transition duration-150 ease-in-out inline-flex items-center justify-center";
+    "font-normal rounded-sm focus:outline-none transition duration-150 ease-in-out inline-flex items-center justify-center";
 
   const variantStyles = {
-    primary: "bg-black text-white hover:bg-gray-800",
-    secondary: "bg-gray-500 text-white hover:bg-gray-600",
+    primary: "bg-primary text-black hover:bg-gray-800",
+    secondary: "bg-black text-white hover:bg-gray-600",
     danger: "bg-red-500 text-white hover:bg-red-600",
     success: "bg-green-500 text-white hover:bg-green-600",
     warning: "bg-yellow-500 text-white hover:bg-yellow-600",

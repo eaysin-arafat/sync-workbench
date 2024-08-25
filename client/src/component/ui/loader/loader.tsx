@@ -1,12 +1,13 @@
-import style from "./loader.module.css";
+import styles from "./loader.module.css";
 
-// Loader component
-const Loader = () => {
+const SidebarLoader = () => {
   return (
-    <div className="flex items-center w-full bg-bgColor absolute top-0 justify-center h-screen">
-      <span className={style?.crossLoader}></span>
+    <div className="flex items-center justify-center h-screen w-screen">
+      <div className={styles.container}>
+        <div className={styles.line}></div>
+      </div>
     </div>
   );
 };
 
-export default Loader;
+export default SidebarLoader;

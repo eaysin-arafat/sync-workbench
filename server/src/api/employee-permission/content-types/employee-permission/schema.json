@@ -11,18 +11,5 @@
     "draftAndPublish": true
   },
   "pluginOptions": {},
-  "attributes": {
-    "employee_id": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "employee_permissions"
-    },
-    "access_control_id": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::access-control.access-control",
-      "mappedBy": "employee_access_control"
-    }
-  }
+  "attributes": {}
 }
