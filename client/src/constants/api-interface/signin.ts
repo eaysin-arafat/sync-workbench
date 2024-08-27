@@ -2,14 +2,9 @@ interface SignInDataType {
   username: string;
   email: string;
   confirmed: boolean;
-  blocked: boolean;
-  firstName: string;
+  first_name: string;
+  last_name: string;
+  date_of_birth: Date | null;
   password: string;
-  lastName: string;
-  department: string;
-  designation: string;
-  dateOfJoining: string;
-  status: string;
-  phone: string;
-  address?: any;
+  re_enter_password: string;
 }

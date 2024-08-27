@@ -37,7 +37,12 @@ const PasswordInput = (props: Props) => {
       value={value}
       label={label ?? "Password"}
       placeholder={placeholder ?? "Enter Password"}
-      styles={{ input: { height: height ?? "45px", width: width } }}
+      styles={{
+        input: {
+          height: height ?? "45px",
+          width: width,
+        },
+      }}
       onChange={onChange}
       withAsterisk={required}
       error={errMsg}

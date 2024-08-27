@@ -3,7 +3,7 @@ import { Select as MantineSelect } from "@mantine/core";
 // Select input props
 type Props = {
   value?: string;
-  onChange?: (name: string, value: string | null) => void;
+  onChange?: (value: string) => void; 
   onClick?: () => void;
   name?: string;
   label?: string;
@@ -11,7 +11,7 @@ type Props = {
   errMsg?: string;
   disabled?: boolean;
   placeholder?: string;
-  options?: string[];
+  options?: { value: string; label: string }[] | string[];
   id?: string;
   height?: string;
   width?: string;
@@ -29,7 +29,7 @@ function Select({
   disabled,
   onClick,
   placeholder,
-  options = [],
+  options,
   id,
   height,
   width,
@@ -43,20 +43,17 @@ function Select({
       id={id}
       name={name}
       onClick={onClick}
-      onChange={(value) => {
-        if (onChange && name) {
-          onChange(name, value);
-        }
+      onChange={(data) => {
+        if (onChange && data) onChange(data);
       }}
       withAsterisk={required}
       disabled={disabled}
-      data={options}
+      data={options || undefined}
       error={errMsg}
       styles={{
         root: { width: width ? `${width}` : "100%" },
         input: {
           height: height ? `${height}px` : "45px",
-          borderColor: "#E2E8F0",
         },
         label: { fontSize: "15px" },
       }}

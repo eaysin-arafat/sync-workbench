@@ -20,23 +20,26 @@
     "location": {
       "type": "string"
     },
-    "manager_id": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::employee.employee",
-      "inversedBy": "departments"
-    },
-    "employees": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::employee.employee",
-      "mappedBy": "department_id"
-    },
     "projects": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::project.project",
       "mappedBy": "department_id"
+    },
+    "description": {
+      "type": "string"
+    },
+    "manager": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "employee_of_departments"
+    },
+    "employees": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employee.employee",
+      "mappedBy": "manager_of_department"
     }
   }
 }

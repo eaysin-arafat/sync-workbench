@@ -77,6 +77,108 @@ export const authApi = API.injectEndpoints({
         handleAuthResponse(result, dispatch);
       },
     }),
+
+    /**
+     * @description callback
+     * @url /auth/callback
+     * @method POST
+     */
+    callback: builder.mutation({
+      query: (provider) => ({
+        url: `/auth/${provider}/callback`,
+        method: "POST",
+      }),
+    }),
+
+    /**
+     * @description connect
+     * @url /auth/connect
+     * @method POST
+     */
+    connect: builder.mutation({
+      query: (provider) => ({
+        url: `/auth/${provider}/connect`,
+        method: "POST",
+      }),
+    }),
+
+    /**
+     * @description forgotPassword
+     * @url /auth/forgot-password
+     * @method POST
+     */
+    forgotPassword: builder.mutation({
+      query: (body) => ({
+        url: `/auth/forgot-password`,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    /**
+     * @description resetPassword
+     * @url /auth/reset-password
+     * @method POST
+     */
+    resetPassword: builder.mutation({
+      query: (body) => ({
+        url: `/auth/reset-password`,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    /**
+     * @description changePassword
+     * @url /auth/change-password
+     * @method POST
+     */
+    changePassword: builder.mutation({
+      query: (body) => ({
+        url: `/auth/change-password`,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    /**
+     * @description emailConfirmation
+     * @url /auth/email-confirmation
+     * @method POST
+     */
+    emailConfirmation: builder.mutation({
+      query: (confirmationCode) => ({
+        url: `/auth/email-confirmation`,
+        method: "POST",
+        body: { confirmationCode },
+      }),
+    }),
+
+    /**
+     * @description register
+     * @url /auth/register
+     * @method POST
+     */
+    register: builder.mutation({
+      query: (body) => ({
+        url: `/auth/register`,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    /**
+     * @description sendEmailConfirmation
+     * @url /auth/send-email-confirmation
+     * @method POST
+     */
+    sendEmailConfirmation: builder.mutation({
+      query: (body) => ({
+        url: `/auth/send-email-confirmation`,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -84,5 +186,13 @@ export const {
   useLoginUserMutation,
   useReadUserQuery,
   useRegistrationUserMutation,
+  useCallbackMutation,
+  useChangePasswordMutation,
+  useConnectMutation,
+  useEmailConfirmationMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
+  useSendEmailConfirmationMutation,
+  useRegisterMutation,
 } = authApi;
 export default authApi;

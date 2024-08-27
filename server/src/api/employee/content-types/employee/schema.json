@@ -15,16 +15,6 @@
     "date_of_hire": {
       "type": "date"
     },
-    "job_title": {
-      "type": "string",
-      "required": true
-    },
-    "department_id": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::department.department",
-      "inversedBy": "employees"
-    },
     "position_id": {
       "type": "relation",
       "relation": "manyToOne",
@@ -38,14 +28,6 @@
     "employment_status": {
       "type": "string",
       "required": true
-    },
-    "profile_picture": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
     },
     "employee_status": {
       "type": "string",
@@ -68,7 +50,7 @@
       "target": "api::document.document",
       "mappedBy": "employee_id"
     },
-    "manager_id": {
+    "reporting_employees": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::employee.employee",
@@ -78,13 +60,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::employee.employee",
-      "inversedBy": "manager_id"
-    },
-    "departments": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::department.department",
-      "mappedBy": "manager_id"
+      "inversedBy": "reporting_employees"
     },
     "projects": {
       "type": "relation",
@@ -116,22 +92,22 @@
       "target": "api::payroll.payroll",
       "mappedBy": "employee_id"
     },
-    "employee_skills": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::employee-skill.employee-skill",
-      "mappedBy": "employee_id"
-    },
-    "employee_certifications": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::employee-certification.employee-certification",
-      "mappedBy": "employee_id"
-    },
     "user_info": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "manager_of_department": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::department.department",
+      "inversedBy": "employees"
+    },
+    "employee_of_departments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::department.department",
+      "mappedBy": "manager"
     }
   }
 }

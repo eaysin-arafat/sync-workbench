@@ -1,12 +1,15 @@
+import { Kbd } from "@mantine/core";
 import { IoSearchOutline } from "react-icons/io5";
 
 const Search = () => {
   return (
     <div className="absolute hidden sm:block left-[50px] lg:left-[280px]">
       <div className="relative w-full">
-        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <div className="absolute inset-y-0 left-0 flex items-center justify-between w-full pl-3 pointer-events-none">
           <IoSearchOutline size={18} />
-          <span className="sr-only">Search icon</span>
+          <div className="flex items-center gap-1.5">
+            <Kbd>Ctrl</Kbd> + <Kbd>K</Kbd>
+          </div>
         </div>
         <input
           type="text"

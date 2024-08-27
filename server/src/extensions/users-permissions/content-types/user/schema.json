@@ -74,7 +74,7 @@
       "required": true
     },
     "phone_number": {
-      "required": true,
+      "required": false,
       "type": "integer"
     },
     "date_of_birth": {
@@ -98,9 +98,9 @@
     },
     "zip_code": {
       "type": "integer",
-      "required": true
+      "required": false
     },
-    "profile_picture": {
+    "avatar": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -112,6 +112,28 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::employee.employee"
+    },
+    "work_experiences": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::work-experience.work-experience",
+      "mappedBy": "user"
+    },
+    "employee_skills": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employee-skill.employee-skill",
+      "mappedBy": "user"
+    },
+    "employee_certifications": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::employee-certification.employee-certification",
+      "mappedBy": "user"
+    },
+    "position_title": {
+      "type": "string",
+      "required": true
     }
   }
 }

@@ -15,16 +15,16 @@
     "proficiency_level": {
       "type": "string"
     },
-    "employee_id": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::employee.employee",
-      "inversedBy": "employee_skills"
-    },
     "skill_id": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::skill.skill",
+      "inversedBy": "employee_skills"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
       "inversedBy": "employee_skills"
     }
   }

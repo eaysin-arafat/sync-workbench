@@ -7,12 +7,14 @@ export interface User {
   blocked: boolean;
   createdAt: string;
   updatedAt: string;
-  firstName: string;
-  lastName: string;
-  department: string;
-  designation: string;
-  dateOfJoining: string;
-  status: string;
-  phone: string;
-  address?: any;
+  first_name: string;
+  last_name: string;
+  address: string;
+  date_of_birth?: any;
+  city: string;
+  state: string;
+  country: string;
+  zip_code: number;
+  phone_number: number;
+  position_title: string;
 }

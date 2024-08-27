@@ -725,19 +725,35 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     first_name: Attribute.String & Attribute.Required;
     last_name: Attribute.String & Attribute.Required;
-    phone_number: Attribute.Integer & Attribute.Required;
+    phone_number: Attribute.Integer;
     date_of_birth: Attribute.Date;
     address: Attribute.Text & Attribute.Required;
     city: Attribute.String & Attribute.Required;
     state: Attribute.String & Attribute.Required;
     country: Attribute.String & Attribute.Required;
-    zip_code: Attribute.Integer & Attribute.Required;
-    profile_picture: Attribute.Media<'images'>;
+    zip_code: Attribute.Integer;
+    avatar: Attribute.Media<'images'>;
     employee_id: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToOne',
       'api::employee.employee'
     >;
+    work_experiences: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::work-experience.work-experience'
+    >;
+    employee_skills: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::employee-skill.employee-skill'
+    >;
+    employee_certifications: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::employee-certification.employee-certification'
+    >;
+    position_title: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -967,7 +983,13 @@ export interface ApiDepartmentDepartment extends Schema.CollectionType {
   attributes: {
     department_name: Attribute.String & Attribute.Required & Attribute.Unique;
     location: Attribute.String;
-    manager_id: Attribute.Relation<
+    projects: Attribute.Relation<
+      'api::department.department',
+      'oneToMany',
+      'api::project.project'
+    >;
+    description: Attribute.String;
+    manager: Attribute.Relation<
       'api::department.department',
       'manyToOne',
       'api::employee.employee'
@@ -976,11 +998,6 @@ export interface ApiDepartmentDepartment extends Schema.CollectionType {
       'api::department.department',
       'oneToMany',
       'api::employee.employee'
-    >;
-    projects: Attribute.Relation<
-      'api::department.department',
-      'oneToMany',
-      'api::project.project'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1052,12 +1069,6 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
   };
   attributes: {
     date_of_hire: Attribute.Date;
-    job_title: Attribute.String & Attribute.Required;
-    department_id: Attribute.Relation<
-      'api::employee.employee',
-      'manyToOne',
-      'api::department.department'
-    >;
     position_id: Attribute.Relation<
       'api::employee.employee',
       'manyToOne',
@@ -1065,7 +1076,6 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
     >;
     salary: Attribute.BigInteger & Attribute.Required;
     employment_status: Attribute.String & Attribute.Required;
-    profile_picture: Attribute.Media<'images', true>;
     employee_status: Attribute.String & Attribute.Required;
     is_internship: Attribute.Boolean &
       Attribute.Required &
@@ -1080,7 +1090,7 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       'oneToMany',
       'api::document.document'
     >;
-    manager_id: Attribute.Relation<
+    reporting_employees: Attribute.Relation<
       'api::employee.employee',
       'oneToMany',
       'api::employee.employee'
@@ -1089,11 +1099,6 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       'api::employee.employee',
       'manyToOne',
       'api::employee.employee'
-    >;
-    departments: Attribute.Relation<
-      'api::employee.employee',
-      'oneToMany',
-      'api::department.department'
     >;
     projects: Attribute.Relation<
       'api::employee.employee',
@@ -1120,20 +1125,20 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
       'oneToMany',
       'api::payroll.payroll'
     >;
-    employee_skills: Attribute.Relation<
-      'api::employee.employee',
-      'oneToMany',
-      'api::employee-skill.employee-skill'
-    >;
-    employee_certifications: Attribute.Relation<
-      'api::employee.employee',
-      'oneToMany',
-      'api::employee-certification.employee-certification'
-    >;
     user_info: Attribute.Relation<
       'api::employee.employee',
       'oneToOne',
       'plugin::users-permissions.user'
+    >;
+    manager_of_department: Attribute.Relation<
+      'api::employee.employee',
+      'manyToOne',
+      'api::department.department'
+    >;
+    employee_of_departments: Attribute.Relation<
+      'api::employee.employee',
+      'oneToMany',
+      'api::department.department'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1173,10 +1178,10 @@ export interface ApiEmployeeCertificationEmployeeCertification
     >;
     obtained_date: Attribute.Date & Attribute.Required;
     expiry_date: Attribute.Date & Attribute.Required;
-    employee_id: Attribute.Relation<
+    user: Attribute.Relation<
       'api::employee-certification.employee-certification',
       'manyToOne',
-      'api::employee.employee'
+      'plugin::users-permissions.user'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1240,15 +1245,15 @@ export interface ApiEmployeeSkillEmployeeSkill extends Schema.CollectionType {
   };
   attributes: {
     proficiency_level: Attribute.String;
-    employee_id: Attribute.Relation<
-      'api::employee-skill.employee-skill',
-      'manyToOne',
-      'api::employee.employee'
-    >;
     skill_id: Attribute.Relation<
       'api::employee-skill.employee-skill',
       'manyToOne',
       'api::skill.skill'
+    >;
+    user: Attribute.Relation<
+      'api::employee-skill.employee-skill',
+      'manyToOne',
+      'plugin::users-permissions.user'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1512,6 +1517,45 @@ export interface ApiTaskTask extends Schema.CollectionType {
   };
 }
 
+export interface ApiWorkExperienceWorkExperience extends Schema.CollectionType {
+  collectionName: 'work_experiences';
+  info: {
+    singularName: 'work-experience';
+    pluralName: 'work-experiences';
+    displayName: 'WorkExperience';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    company_name: Attribute.String & Attribute.Required;
+    job_title: Attribute.String & Attribute.Required;
+    start_date: Attribute.Date;
+    end_date: Attribute.Date;
+    description: Attribute.Text;
+    user: Attribute.Relation<
+      'api::work-experience.work-experience',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::work-experience.work-experience',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::work-experience.work-experience',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1546,6 +1590,7 @@ declare module '@strapi/types' {
       'api::project.project': ApiProjectProject;
       'api::skill.skill': ApiSkillSkill;
       'api::task.task': ApiTaskTask;
+      'api::work-experience.work-experience': ApiWorkExperienceWorkExperience;
     }
   }
 }

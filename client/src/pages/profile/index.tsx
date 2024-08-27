@@ -1,6 +1,6 @@
 import CoverOne from "@/assets/images/cover/cover-01.png";
 import userSix from "@/assets/images/user/user-06.png";
-import Breadcrumb from "@/component/shared/breadcrumbs";
+import Breadcrumb from "@/component/ui/breadcrumbs";
 import { Link } from "react-router-dom";
 
 const Profile = () => {

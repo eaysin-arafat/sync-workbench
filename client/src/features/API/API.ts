@@ -1,3 +1,4 @@
+import apiTags from "@/features/API/tags";
 import { cookieManager } from "@/utils/cookie-manager";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -11,5 +12,5 @@ export const API = createApi({
     },
   }),
   endpoints: () => ({}),
-  tagTypes: [],
+  tagTypes: [...apiTags],
 });

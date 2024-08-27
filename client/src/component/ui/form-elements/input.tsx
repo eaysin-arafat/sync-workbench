@@ -16,7 +16,6 @@ type Props = {
   id?: string;
   width?: string;
   height?: string;
-  backgroundColor?: string;
 };
 
 // input component
@@ -36,7 +35,6 @@ const Input = (props: Props) => {
     id,
     width,
     height,
-    backgroundColor,
   } = props;
 
   return (
@@ -53,8 +51,6 @@ const Input = (props: Props) => {
           input: {
             height: height ? `${height}px` : "45px",
             width: `${width}px`,
-            backgroundColor: backgroundColor,
-            borderColor: "#E2E8F0",
           },
         }}
         id={id}
