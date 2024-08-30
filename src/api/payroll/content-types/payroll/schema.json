@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "payrolls",
+  "info": {
+    "singularName": "payroll",
+    "pluralName": "payrolls",
+    "displayName": "Payroll",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "salary_date": {
+      "type": "date",
+      "required": true
+    },
+    "gross_salary": {
+      "type": "biginteger",
+      "required": true
+    },
+    "tax_deduction": {
+      "type": "biginteger",
+      "required": true,
+      "unique": false
+    },
+    "net_salary": {
+      "type": "integer",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "payrolls"
+    }
+  }
+}

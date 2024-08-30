@@ -1,8 +1,0 @@
-.m_539e827b {
-  font-weight: 500;
-  font-size: 12px !important;
-}
-
-.m_539e827b:where([data-active="true"]) {
-  color: red !important;
-}

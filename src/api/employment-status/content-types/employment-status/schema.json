@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employment_statuses",
+  "info": {
+    "singularName": "employment-status",
+    "pluralName": "employment-statuses",
+    "displayName": "EmploymentStatus"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

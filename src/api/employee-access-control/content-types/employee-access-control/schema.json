@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employee_access_controls",
+  "info": {
+    "singularName": "employee-access-control",
+    "pluralName": "employee-access-controls",
+    "displayName": "EmployeeAccessControl"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "access_controls": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::access-control.access-control",
+      "mappedBy": "employee_access_control"
+    }
+  }
+}

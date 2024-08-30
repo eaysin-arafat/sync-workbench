@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "performance_reviews",
+  "info": {
+    "singularName": "performance-review",
+    "pluralName": "performance-reviews",
+    "displayName": "PerformanceReview",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "review_date": {
+      "type": "date",
+      "required": true
+    },
+    "review_period_start": {
+      "type": "date"
+    },
+    "review_period_end": {
+      "type": "date",
+      "required": true
+    },
+    "overall_rating": {
+      "type": "integer",
+      "required": true
+    },
+    "comments": {
+      "type": "text"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "performance_reviews"
+    }
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "kind": "collectionType",
+  "collectionName": "employees",
+  "info": {
+    "singularName": "employee",
+    "pluralName": "employees",
+    "displayName": "Employee",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "date_of_hire": {
+      "type": "date",
+      "required": true
+    },
+    "salary": {
+      "type": "biginteger",
+      "required": true
+    },
+    "is_internship": {
+      "type": "boolean",
+      "required": true
+    },
+    "attendances": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::attendance.attendance",
+      "mappedBy": "employee"
+    },
+    "documents": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::document.document",
+      "mappedBy": "employee"
+    },
+    "reporting_employees": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::access-control.access-control",
+      "mappedBy": "employee"
+    },
+    "tasks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::task.task",
+      "mappedBy": "employee"
+    },
+    "leaves": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::leave.leave",
+      "mappedBy": "employee"
+    },
+    "performance_reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::performance-review.performance-review",
+      "mappedBy": "employee"
+    },
+    "payrolls": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::payroll.payroll",
+      "mappedBy": "employee"
+    },
+    "user_info": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "manager_of_departments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::document.document",
+      "mappedBy": "employee"
+    },
+    "employee_of_departments": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::department.department"
+    },
+    "employee_status": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee-status.employee-status"
+    },
+    "identity": {
+      "type": "customField",
+      "options": {
+        "uuid-format": "^[A-Za-z0-9]{5}$",
+        "disable-regenerate": true
+      },
+      "customField": "plugin::strapi-advanced-uuid.uuid"
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::project.project",
+      "mappedBy": "employees"
+    },
+    "employment_status": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employment-status.employment-status"
+    },
+    "department": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::department.department",
+      "inversedBy": "employees"
+    }
+  }
+}
