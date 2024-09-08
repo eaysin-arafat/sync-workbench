@@ -39,14 +39,14 @@
     "reporting_employees": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::access-control.access-control",
-      "mappedBy": "employee"
+      "target": "api::employee.employee",
+      "mappedBy": "manager"
     },
-    "tasks": {
+    "manager": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::task.task",
-      "mappedBy": "employee"
+      "relation": "manyToOne",
+      "target": "api::employee.employee",
+      "inversedBy": "reporting_employees"
     },
     "leaves": {
       "type": "relation",
@@ -94,12 +94,6 @@
         "disable-regenerate": true
       },
       "customField": "plugin::strapi-advanced-uuid.uuid"
-    },
-    "projects": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::project.project",
-      "mappedBy": "employees"
     },
     "employment_status": {
       "type": "relation",

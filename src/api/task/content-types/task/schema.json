@@ -23,24 +23,36 @@
       "type": "string",
       "required": true
     },
-    "priority": {
-      "type": "string",
-      "required": true
-    },
     "due_date": {
       "type": "date"
     },
     "project_id": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::project.project",
-      "inversedBy": "tasks"
+      "relation": "oneToOne",
+      "target": "api::project.project"
     },
-    "employee": {
+    "start_date": {
+      "type": "date"
+    },
+    "priority": {
+      "type": "string"
+    },
+    "assigned_to": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "parent_task_id": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::task.task",
+      "mappedBy": "subtask_ids"
+    },
+    "subtask_ids": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::employee.employee",
-      "inversedBy": "tasks"
+      "target": "api::task.task",
+      "inversedBy": "parent_task_id"
     }
   }
 }

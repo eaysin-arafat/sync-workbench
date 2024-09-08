@@ -796,10 +796,10 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'oneToMany',
       'api::work-experience.work-experience'
     >;
-    position: Attribute.Relation<
+    designation: Attribute.Relation<
       'plugin::users-permissions.user',
       'manyToOne',
-      'api::application-role.application-role'
+      'api::designation.designation'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -839,11 +839,6 @@ export interface ApiAccessControlAccessControl extends Schema.CollectionType {
       'manyToOne',
       'api::employee-access-control.employee-access-control'
     >;
-    employee: Attribute.Relation<
-      'api::access-control.access-control',
-      'manyToOne',
-      'api::employee.employee'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -855,44 +850,6 @@ export interface ApiAccessControlAccessControl extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::access-control.access-control',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiApplicationRoleApplicationRole
-  extends Schema.CollectionType {
-  collectionName: 'application_roles';
-  info: {
-    singularName: 'application-role';
-    pluralName: 'application-roles';
-    displayName: 'Position';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required & Attribute.Unique;
-    users: Attribute.Relation<
-      'api::application-role.application-role',
-      'oneToMany',
-      'plugin::users-permissions.user'
-    >;
-    description: Attribute.Text;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::application-role.application-role',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::application-role.application-role',
       'oneToOne',
       'admin::user'
     > &
@@ -1029,6 +986,42 @@ export interface ApiDepartmentDepartment extends Schema.CollectionType {
   };
 }
 
+export interface ApiDesignationDesignation extends Schema.CollectionType {
+  collectionName: 'designations';
+  info: {
+    singularName: 'designation';
+    pluralName: 'designations';
+    displayName: 'Designation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    description: Attribute.Text;
+    users: Attribute.Relation<
+      'api::designation.designation',
+      'oneToMany',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::designation.designation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::designation.designation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiDocumentDocument extends Schema.CollectionType {
   collectionName: 'documents';
   info: {
@@ -1096,12 +1089,12 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
     reporting_employees: Attribute.Relation<
       'api::employee.employee',
       'oneToMany',
-      'api::access-control.access-control'
+      'api::employee.employee'
     >;
-    tasks: Attribute.Relation<
+    manager: Attribute.Relation<
       'api::employee.employee',
-      'oneToMany',
-      'api::task.task'
+      'manyToOne',
+      'api::employee.employee'
     >;
     leaves: Attribute.Relation<
       'api::employee.employee',
@@ -1153,11 +1146,6 @@ export interface ApiEmployeeEmployee extends Schema.CollectionType {
           'disable-regenerate': true;
         }
       >;
-    projects: Attribute.Relation<
-      'api::employee.employee',
-      'manyToMany',
-      'api::project.project'
-    >;
     employment_status: Attribute.Relation<
       'api::employee.employee',
       'oneToOne',
@@ -1500,17 +1488,9 @@ export interface ApiProjectProject extends Schema.CollectionType {
       'manyToOne',
       'api::department.department'
     >;
-    tasks: Attribute.Relation<
-      'api::project.project',
-      'oneToMany',
-      'api::task.task'
-    >;
-    employees: Attribute.Relation<
-      'api::project.project',
-      'manyToMany',
-      'api::employee.employee'
-    >;
-    project_manager: Attribute.Relation<
+    status: Attribute.String & Attribute.Required;
+    budget: Attribute.BigInteger;
+    project_manager_id: Attribute.Relation<
       'api::project.project',
       'oneToOne',
       'api::employee.employee'
@@ -1526,6 +1506,85 @@ export interface ApiProjectProject extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::project.project',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProjectTeamProjectTeam extends Schema.CollectionType {
+  collectionName: 'project_teams';
+  info: {
+    singularName: 'project-team';
+    pluralName: 'project-teams';
+    displayName: 'ProjectTeam';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    project: Attribute.Relation<
+      'api::project-team.project-team',
+      'oneToOne',
+      'api::project.project'
+    >;
+    team_id: Attribute.Relation<
+      'api::project-team.project-team',
+      'oneToOne',
+      'api::team.team'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::project-team.project-team',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::project-team.project-team',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProjectTeamLeaderProjectTeamLeader
+  extends Schema.CollectionType {
+  collectionName: 'project_team_leaders';
+  info: {
+    singularName: 'project-team-leader';
+    pluralName: 'project-team-leaders';
+    displayName: 'ProjectTeamLeader';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    project_id: Attribute.Relation<
+      'api::project-team-leader.project-team-leader',
+      'oneToOne',
+      'api::project.project'
+    >;
+    team_leader_id: Attribute.Relation<
+      'api::project-team-leader.project-team-leader',
+      'oneToOne',
+      'api::team-leader.team-leader'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::project-team-leader.project-team-leader',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::project-team-leader.project-team-leader',
       'oneToOne',
       'admin::user'
     > &
@@ -1585,17 +1644,28 @@ export interface ApiTaskTask extends Schema.CollectionType {
     task_name: Attribute.String & Attribute.Required;
     description: Attribute.Text;
     status: Attribute.String & Attribute.Required;
-    priority: Attribute.String & Attribute.Required;
     due_date: Attribute.Date;
     project_id: Attribute.Relation<
       'api::task.task',
-      'manyToOne',
+      'oneToOne',
       'api::project.project'
     >;
-    employee: Attribute.Relation<
+    start_date: Attribute.Date;
+    priority: Attribute.String;
+    assigned_to: Attribute.Relation<
+      'api::task.task',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    parent_task_id: Attribute.Relation<
+      'api::task.task',
+      'oneToMany',
+      'api::task.task'
+    >;
+    subtask_ids: Attribute.Relation<
       'api::task.task',
       'manyToOne',
-      'api::employee.employee'
+      'api::task.task'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1603,6 +1673,144 @@ export interface ApiTaskTask extends Schema.CollectionType {
     createdBy: Attribute.Relation<'api::task.task', 'oneToOne', 'admin::user'> &
       Attribute.Private;
     updatedBy: Attribute.Relation<'api::task.task', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTeamTeam extends Schema.CollectionType {
+  collectionName: 'teams';
+  info: {
+    singularName: 'team';
+    pluralName: 'teams';
+    displayName: 'Team';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    team_name: Attribute.String & Attribute.Required & Attribute.Unique;
+    description: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTeamLeaderTeamLeader extends Schema.CollectionType {
+  collectionName: 'team_leaders';
+  info: {
+    singularName: 'team-leader';
+    pluralName: 'team-leaders';
+    displayName: 'TeamLeader';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    team_id: Attribute.Relation<
+      'api::team-leader.team-leader',
+      'oneToOne',
+      'api::team.team'
+    >;
+    employee_id: Attribute.Relation<
+      'api::team-leader.team-leader',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::team-leader.team-leader',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::team-leader.team-leader',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTeamMemberTeamMember extends Schema.CollectionType {
+  collectionName: 'team_members';
+  info: {
+    singularName: 'team-member';
+    pluralName: 'team-members';
+    displayName: 'TeamMember';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    team: Attribute.Relation<
+      'api::team-member.team-member',
+      'oneToOne',
+      'api::team.team'
+    >;
+    employee: Attribute.Relation<
+      'api::team-member.team-member',
+      'oneToOne',
+      'api::employee.employee'
+    >;
+    team_role: Attribute.Relation<
+      'api::team-member.team-member',
+      'oneToOne',
+      'api::team-role.team-role'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::team-member.team-member',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::team-member.team-member',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTeamRoleTeamRole extends Schema.CollectionType {
+  collectionName: 'team_roles';
+  info: {
+    singularName: 'team-role';
+    pluralName: 'team-roles';
+    displayName: 'TeamRole';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    role_name: Attribute.String & Attribute.Required & Attribute.Unique;
+    description: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::team-role.team-role',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::team-role.team-role',
+      'oneToOne',
+      'admin::user'
+    > &
       Attribute.Private;
   };
 }
@@ -1665,10 +1873,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::access-control.access-control': ApiAccessControlAccessControl;
-      'api::application-role.application-role': ApiApplicationRoleApplicationRole;
       'api::attendance.attendance': ApiAttendanceAttendance;
       'api::certification.certification': ApiCertificationCertification;
       'api::department.department': ApiDepartmentDepartment;
+      'api::designation.designation': ApiDesignationDesignation;
       'api::document.document': ApiDocumentDocument;
       'api::employee.employee': ApiEmployeeEmployee;
       'api::employee-access-control.employee-access-control': ApiEmployeeAccessControlEmployeeAccessControl;
@@ -1680,8 +1888,14 @@ declare module '@strapi/types' {
       'api::payroll.payroll': ApiPayrollPayroll;
       'api::performance-review.performance-review': ApiPerformanceReviewPerformanceReview;
       'api::project.project': ApiProjectProject;
+      'api::project-team.project-team': ApiProjectTeamProjectTeam;
+      'api::project-team-leader.project-team-leader': ApiProjectTeamLeaderProjectTeamLeader;
       'api::skill.skill': ApiSkillSkill;
       'api::task.task': ApiTaskTask;
+      'api::team.team': ApiTeamTeam;
+      'api::team-leader.team-leader': ApiTeamLeaderTeamLeader;
+      'api::team-member.team-member': ApiTeamMemberTeamMember;
+      'api::team-role.team-role': ApiTeamRoleTeamRole;
       'api::work-experience.work-experience': ApiWorkExperienceWorkExperience;
     }
   }

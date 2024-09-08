@@ -124,10 +124,10 @@
       "target": "api::work-experience.work-experience",
       "mappedBy": "user"
     },
-    "position": {
+    "designation": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::application-role.application-role",
+      "target": "api::designation.designation",
       "inversedBy": "users"
     }
   }

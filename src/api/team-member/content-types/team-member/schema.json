@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "team_members",
+  "info": {
+    "singularName": "team-member",
+    "pluralName": "team-members",
+    "displayName": "TeamMember",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "team": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::team.team"
+    },
+    "employee": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    },
+    "team_role": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::team-role.team-role"
+    }
+  }
+}

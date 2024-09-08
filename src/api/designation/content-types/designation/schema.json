@@ -1,11 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "application_roles",
+  "collectionName": "designations",
   "info": {
-    "singularName": "application-role",
-    "pluralName": "application-roles",
-    "displayName": "Position",
-    "description": ""
+    "singularName": "designation",
+    "pluralName": "designations",
+    "displayName": "Designation"
   },
   "options": {
     "draftAndPublish": true
@@ -17,14 +16,14 @@
       "required": true,
       "unique": true
     },
+    "description": {
+      "type": "text"
+    },
     "users": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "plugin::users-permissions.user",
-      "mappedBy": "position"
-    },
-    "description": {
-      "type": "text"
+      "mappedBy": "designation"
     }
   }
 }

@@ -25,12 +25,6 @@
       "relation": "manyToOne",
       "target": "api::employee-access-control.employee-access-control",
       "inversedBy": "access_controls"
-    },
-    "employee": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::employee.employee",
-      "inversedBy": "reporting_employees"
     }
   }
 }

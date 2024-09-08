@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "team_leaders",
+  "info": {
+    "singularName": "team-leader",
+    "pluralName": "team-leaders",
+    "displayName": "TeamLeader"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "team_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::team.team"
+    },
+    "employee_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::employee.employee"
+    }
+  }
+}

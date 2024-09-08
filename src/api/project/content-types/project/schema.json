@@ -33,19 +33,14 @@
       "target": "api::department.department",
       "inversedBy": "projects"
     },
-    "tasks": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::task.task",
-      "mappedBy": "project_id"
+    "status": {
+      "type": "string",
+      "required": true
     },
-    "employees": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::employee.employee",
-      "inversedBy": "projects"
+    "budget": {
+      "type": "biginteger"
     },
-    "project_manager": {
+    "project_manager_id": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::employee.employee"
