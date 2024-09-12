@@ -81,10 +81,6 @@
       "type": "string",
       "required": true
     },
-    "position_name": {
-      "type": "string",
-      "required": true
-    },
     "address": {
       "type": "string"
     },
@@ -108,12 +104,12 @@
     "zip_code": {
       "type": "integer"
     },
-    "employee_skill": {
+    "skills": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::employee-skill.employee-skill"
     },
-    "employee_certification": {
+    "certification": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::employee-certification.employee-certification"
@@ -124,11 +120,8 @@
       "target": "api::work-experience.work-experience",
       "mappedBy": "user"
     },
-    "designation": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::designation.designation",
-      "inversedBy": "users"
+    "isEmployee": {
+      "type": "boolean"
     }
   }
 }

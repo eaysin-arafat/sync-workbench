@@ -10,7 +10,6 @@ module.exports = {
       const { name } = ctx.query;
 
       const contentTypes = strapi.contentTypes;
-      console.log(Object.keys(contentTypes));
 
       if (!name) {
         ctx.status = 400;
@@ -23,7 +22,7 @@ module.exports = {
         .query("api::department.department")
         .findMany({
           where: {
-            department_name: {
+            name: {
               $eqi: normalizedName,
             },
           },

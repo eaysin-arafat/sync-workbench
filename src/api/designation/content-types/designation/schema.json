@@ -4,7 +4,8 @@
   "info": {
     "singularName": "designation",
     "pluralName": "designations",
-    "displayName": "Designation"
+    "displayName": "Designation",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,10 +20,10 @@
     "description": {
       "type": "text"
     },
-    "users": {
+    "employees": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "plugin::users-permissions.user",
+      "target": "api::employee.employee",
       "mappedBy": "designation"
     }
   }

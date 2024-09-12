@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "department_name": {
+    "name": {
       "type": "string",
       "required": true,
       "unique": true
@@ -22,14 +22,6 @@
     },
     "description": {
       "type": "string"
-    },
-    "photo": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
     },
     "manager": {
       "type": "relation",
@@ -46,7 +38,7 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::employee.employee",
-      "mappedBy": "department"
+      "mappedBy": "employee_of_departments"
     }
   }
 }

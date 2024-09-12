@@ -14,15 +14,15 @@
   "attributes": {
     "date_of_hire": {
       "type": "date",
-      "required": true
+      "required": false
     },
     "salary": {
       "type": "biginteger",
-      "required": true
+      "required": false
     },
     "is_internship": {
       "type": "boolean",
-      "required": true
+      "required": false
     },
     "attendances": {
       "type": "relation",
@@ -40,9 +40,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::employee.employee",
-      "mappedBy": "manager"
+      "mappedBy": "reporting_manager"
     },
-    "manager": {
+    "reporting_manager": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::employee.employee",
@@ -69,18 +69,14 @@
     "user_info": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "plugin::users-permissions.user"
+      "target": "plugin::users-permissions.user",
+      "unique": true
     },
     "manager_of_departments": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::document.document",
       "mappedBy": "employee"
-    },
-    "employee_of_departments": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::department.department"
     },
     "employee_status": {
       "type": "relation",
@@ -100,10 +96,16 @@
       "relation": "oneToOne",
       "target": "api::employment-status.employment-status"
     },
-    "department": {
+    "employee_of_departments": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::department.department",
+      "inversedBy": "employees"
+    },
+    "designation": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::designation.designation",
       "inversedBy": "employees"
     }
   }
