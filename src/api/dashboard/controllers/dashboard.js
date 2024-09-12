@@ -14,9 +14,27 @@ module.exports = {
 
       const formatDate = (date) => new Date(date).toISOString().split("T")[0];
 
-      const startDate = formatDate(
-        new Date(new Date().setDate(new Date().getDate() - 30))
+      const startDate = formatDate(new Date());
+      const endDate = formatDate(
+        new Date(new Date().setDate(new Date().getDate() + 30))
       );
+
+      // Function to check if a user's birthday is upcoming (within next 30 days)
+      const getUpcomingBirthdays = async () => {
+        return strapi.db.query("plugin::users-permissions.user").findMany({
+          where: {
+            is_employee: true,
+            date_of_birth: {
+              $gte: startDate,
+              $lte: endDate,
+            },
+          },
+          select: ["username", "email", "date_of_birth"],
+          populate: {
+            avatar: true,
+          },
+        });
+      };
 
       const [
         totalEmployees,
@@ -31,6 +49,7 @@ module.exports = {
         totalCertifications,
         recentPerformanceReviews,
         recentPayrolls,
+        upcomingBirthdays,
       ] = await Promise.all([
         getCount("api::employee.employee"),
         getCount("api::employee.employee", { employee_status: "4" }),
@@ -56,6 +75,7 @@ module.exports = {
             },
           },
         }),
+        getUpcomingBirthdays(),
       ]);
 
       // Format recent performance reviews and payroll records
@@ -79,6 +99,17 @@ module.exports = {
             }))
           : [];
 
+      // Format upcoming birthdays data
+      const upcomingBirthdaysData =
+        upcomingBirthdays && upcomingBirthdays.length
+          ? upcomingBirthdays.map((user) => ({
+              username: user.username,
+              email: user.email,
+              date_of_birth: formatDate(user.date_of_birth),
+              avatar: user.avatar ? user.avatar.url : null,
+            }))
+          : [];
+
       // Structure the response
       ctx.body = {
         success: true,
@@ -95,6 +126,7 @@ module.exports = {
           totalCertifications: totalCertifications || 0,
           recentPerformanceReviews: recentPerformanceReviewsData,
           recentPayrolls: recentPayrollsData,
+          upcomingBirthdays: upcomingBirthdaysData,
         },
       };
     } catch (err) {

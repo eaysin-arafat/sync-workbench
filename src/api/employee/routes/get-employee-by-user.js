@@ -6,16 +6,16 @@
 
 const { createCoreRouter } = require("@strapi/strapi").factories;
 
-module.exports = createCoreRouter("api::employee.employee", {
+module.exports = {
   routes: [
     {
       method: "GET",
       path: "/employee/get-employee-by-user/:userId",
-      handler: "employee.getEmployeeByUserId",
+      handler: "get-employee-by-user.getEmployeeByUserId",
       config: {
         policies: [],
         middlewares: [],
       },
     },
   ],
-});
+};
