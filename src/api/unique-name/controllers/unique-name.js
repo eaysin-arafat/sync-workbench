@@ -9,8 +9,6 @@ module.exports = {
     try {
       const { name } = ctx.query;
 
-      const contentTypes = strapi.contentTypes;
-
       if (!name) {
         ctx.status = 400;
         ctx.body = { error: "Department name is required" };
