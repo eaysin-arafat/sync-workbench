@@ -12,13 +12,10 @@ module.exports = createCoreController(
     async getEmployeeByUserId(ctx) {
       const { userId } = ctx.params;
 
-      if (!userId) {
-        return ctx.badRequest("User ID is required.");
-      }
+      if (!userId) return ctx.badRequest("User ID is required.");
 
       try {
-        // Use entityService to query the employee by user ID
-        const employee = await strapi.entityService.findMany(
+        const employees = await strapi.entityService.findMany(
           "api::employee.employee",
           {
             filters: { user_info: { id: userId } },
@@ -38,14 +35,68 @@ module.exports = createCoreController(
           }
         );
 
-        if (!employee || employee.length === 0) {
+        if (!employees || employees.length === 0) {
           return ctx.notFound("No employee found for this user ID.");
         }
 
+        const employee = employees[0];
+
         // Return the employee data
         return ctx.send({
-          success: true,
-          data: employee[0], // Assuming there will be only one employee with the user_info
+          data: {
+            id: employee?.id,
+            attributes: {
+              date_of_hire: employee.date_of_hire,
+              createdAt: employee.createdAt,
+              updatedAt: employee.updatedAt,
+              publishedAt: employee.publishedAt,
+              salary: employee.salary,
+              is_internship: employee.is_internship,
+              identity: employee.identity,
+              reporting_manager: {
+                data: employee.reporting_manager
+                  ? {
+                      id: employee.reporting_manager.id,
+                      attributes: employee.reporting_manager,
+                    }
+                  : null,
+              },
+              reporting_employees: {
+                data: employee.reporting_employees.map((report) => ({
+                  id: report.id,
+                  attributes: report,
+                })),
+              },
+              designation: {
+                data: {
+                  id: employee.designation.id,
+                  attributes: employee.designation,
+                },
+              },
+              employee_status: {
+                data: {
+                  id: employee.employee_status.id,
+                  attributes: employee.employee_status,
+                },
+              },
+              employment_status: {
+                data: {
+                  id: employee.employment_status.id,
+                  attributes: employee.employment_status,
+                },
+              },
+              employee_of_departments: {
+                data: {
+                  id: employee.employee_of_departments.id,
+                  attributes: employee.employee_of_departments,
+                },
+              },
+            },
+          },
+          meta: {
+            timestamp: new Date().toISOString(),
+            message: "Employee data retrieved successfully",
+          },
         });
       } catch (error) {
         console.error("Error fetching employee by userId:", error);
