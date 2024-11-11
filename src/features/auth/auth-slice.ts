@@ -5,14 +5,16 @@ import { createSlice } from "@reduxjs/toolkit";
 type AuthState = {
   isLoggedIn: boolean;
   user: User | null;
-  jwtToken: string | null;
+  accessToken: string | null;
+  refreshToken: string | null;
   error: string | null;
 };
 
 const initialState: AuthState = {
   isLoggedIn: false,
   user: null,
-  jwtToken: null,
+  accessToken: null,
+  refreshToken: null,
   error: null,
 };
 
@@ -23,17 +25,20 @@ const authSlice = createSlice({
     login: (state, action) => {
       state.isLoggedIn = true;
       state.user = action.payload.user;
-      state.jwtToken = action.payload.jwt;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
     },
     logout: (state) => {
       cookieManager.removeCookie("jwtToken");
 
       state.isLoggedIn = false;
       state.user = null;
-      state.jwtToken = null;
+      state.accessToken = null;
+      state.refreshToken = null;
     },
     setToken: (state, action) => {
-      state.jwtToken = action.payload;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
     },
     setUser: (state, action) => {
       state.user = action.payload;

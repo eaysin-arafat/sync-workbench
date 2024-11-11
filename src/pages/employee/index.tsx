@@ -2,7 +2,6 @@ import DeleteConfirmation from "@/component/ui/delete-confirmation/delete-confir
 import Modal from "@/component/ui/modal";
 import PageHeader from "@/component/ui/page-header";
 import CustomPagination from "@/component/ui/pagination/custom-pagination";
-import useGetEmployeeInfo from "@/hooks/shared/useGetEmployeeInfo";
 import EmployeeFilter from "./components/filter/filter";
 import EmployeeForm from "./components/form";
 import EmployeeTable from "./components/table/table";
@@ -34,8 +33,7 @@ const Employee = () => {
     sortConfig,
   } = useEmployee();
 
-  const employee = useGetEmployeeInfo();
-  console.log(employee);
+  // const employee = useGetEmployeeInfo();
 
   return (
     <div>

@@ -63,7 +63,7 @@ const validationSchema = Yup.object({
     .required("Re-entering password is required"),
 });
 
-const SignIn = () => {
+const Register = () => {
   const [error, setError] = useState<string | null>("");
 
   const {
@@ -86,7 +86,7 @@ const SignIn = () => {
       await registration(data).unwrap();
 
       reset();
-    } catch (errorRes) {
+    } catch (error) {
       reset(undefined, { keepValues: true });
     }
   };
@@ -255,4 +255,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Register;

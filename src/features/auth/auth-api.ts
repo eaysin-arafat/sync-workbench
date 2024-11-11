@@ -1,5 +1,7 @@
+import { RootResponse } from "@/constants/api-interface/root";
 import { User } from "@/constants/api-interface/user";
 import { cookieManager } from "@/utils/cookie-manager";
+import { decodeToken } from "@/utils/decode-token";
 import { buildQueryURL, QueryParams } from "@/utils/get-query-params";
 import { handleAuthResponse } from "@/utils/handle-auth-response";
 import { API } from "../API/API";
@@ -11,9 +13,16 @@ interface UserResponse {
 }
 
 interface LoginPayload {
-  identifier: string;
+  username: string;
   password: string;
 }
+
+export interface LoginData {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export type LoginResponse = RootResponse<LoginData>;
 
 export const authApi = API.injectEndpoints({
   endpoints: (builder) => ({
@@ -62,15 +71,40 @@ export const authApi = API.injectEndpoints({
      * @URI /user-account/login
      * @Method POST
      */
-    loginUser: builder.mutation<UserResponse, LoginPayload>({
+    loginUser: builder.mutation<LoginResponse, LoginPayload>({
       query: (body: LoginPayload) => ({
-        url: "/auth/local",
+        url: "/auth/login",
         method: "POST",
         body,
       }),
       async onQueryStarted(_args, { dispatch, queryFulfilled }) {
+        console.log("calling");
+
         const result = await queryFulfilled;
-        handleAuthResponse(result, dispatch);
+
+        const { accessToken, refreshToken } = result.data.data;
+
+        if (accessToken) {
+          cookieManager.saveCookie("accessToken", accessToken, {
+            sameSite: "Lax",
+          });
+          cookieManager.saveCookie("refreshToken", refreshToken, {
+            sameSite: "Lax",
+          });
+
+          const decoded = decodeToken(accessToken);
+          console.log({ decoded });
+
+          dispatch(
+            login({
+              user: decoded,
+              accessToken,
+              refreshToken,
+            })
+          );
+        } else {
+          dispatch(logout());
+        }
       },
     }),
 

@@ -13,25 +13,24 @@ const Navbar = ({
   sidebarOpen: boolean;
 }) => {
   return (
-    <nav className="flex items-center justify-between px-5 flex-grow bg-bgColor z-10 py-3 border-b border-stroke relative">
+    <nav className="flex px-7 bg-bgColor z-10 py-3 border-b border-stroke relative">
       <div
-        className={`flex justify-start items-center gap-7 transition-all duration-300 ease-in-out lg:w-[380px]`}
+        className={`flex justify-between items-center transition-all duration-300 ease-in-out w-[280px]`}
       >
+        <SyncWorkspaceLogo />
+
         <MdLegendToggle
           size={33}
           className="hover:bg-bgColor text-textColor cursor-pointer p-1.5"
           onClick={toggleSidebar}
         />
-
-        <SyncWorkspaceLogo />
       </div>
 
-      <Search />
+      <div className="w-full flex items-center justify-between ">
+        <Search />
 
-      <div className="flex items-center justify-between w-full">
         <div className="flex items-center justify-end space-x-4 md:space-x-6 w-full">
           <SearchModal />
-
           <DarkModeSwitcher />
           <DropdownNotification />
           <DropdownMessage />

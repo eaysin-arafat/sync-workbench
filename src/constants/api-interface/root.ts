@@ -2,10 +2,10 @@ import { QueryParams } from "@/utils/get-query-params";
 
 // Define the response type
 export interface RootResponse<T> {
-  data: EntityAttributes<T>[];
-  meta: {
-    pagination: Pagination;
-  };
+  status: string;
+  statusCode: number;
+  message: string;
+  data: T;
 }
 
 export interface Pagination {

@@ -1,4 +1,3 @@
-import PrivateGuard from "@/component/guards/private-guard";
 import RootLayout from "@/layout/root-layout";
 import Calendar from "@/pages/calendar";
 import Dashboard from "@/pages/dashboard";
@@ -19,41 +18,41 @@ import {
 } from "./router-link";
 
 const privateRoute: RouteObject[] = [
+  // {
+  //   element: <PrivateGuard />,
+  //   children: [
   {
-    element: <PrivateGuard />,
+    element: <RootLayout />,
     children: [
+      { path: getDashboardLink(), element: <Dashboard /> },
       {
-        element: <RootLayout />,
-        children: [
-          { path: getDashboardLink(), element: <Dashboard /> },
-          {
-            path: getUserProfileLink(),
-            element: <Profile />,
-          },
-          {
-            path: getCalendarLink(),
-            element: <Calendar />,
-          },
-          {
-            path: getEmployeeLink(),
-            element: <Employee />,
-          },
-          {
-            path: getDepartmentLink(),
-            element: <Department />,
-          },
-          {
-            path: getRolePermissionLink(),
-            element: <RolePermission />,
-          },
-          {
-            path: getDesignationLink(),
-            element: <Designation />,
-          },
-        ],
+        path: getUserProfileLink(),
+        element: <Profile />,
+      },
+      {
+        path: getCalendarLink(),
+        element: <Calendar />,
+      },
+      {
+        path: getEmployeeLink(),
+        element: <Employee />,
+      },
+      {
+        path: getDepartmentLink(),
+        element: <Department />,
+      },
+      {
+        path: getRolePermissionLink(),
+        element: <RolePermission />,
+      },
+      {
+        path: getDesignationLink(),
+        element: <Designation />,
       },
     ],
   },
+  //     ],
+  //   },
 ];
 
 export default privateRoute;

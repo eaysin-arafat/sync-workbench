@@ -1,6 +1,6 @@
 import PublicGuard from "@/component/guards/public-guard";
-import SignIn from "@/pages/authentication/signIn";
-import SignUp from "@/pages/authentication/signup";
+import Login from "@/pages/authentication/login";
+import Register from "@/pages/authentication/register";
 import { RouteObject } from "react-router-dom";
 import { getSignupLink } from "./router-link";
 
@@ -8,8 +8,8 @@ const publicRoute: RouteObject[] = [
   {
     element: <PublicGuard />,
     children: [
-      { path: "/", element: <SignIn /> },
-      { path: getSignupLink(), element: <SignUp /> },
+      { path: "/", element: <Login /> },
+      { path: getSignupLink(), element: <Register /> },
     ],
   },
 ];

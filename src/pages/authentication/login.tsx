@@ -28,7 +28,7 @@ const validationSchema = Yup.object({
   password: Yup.string().required("Password name is required"),
 });
 
-const SignIn = () => {
+const Login = () => {
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const [error, setError] = useState<string | null>("");
 
@@ -70,7 +70,7 @@ const SignIn = () => {
       }
 
       await userLogin({
-        identifier: data?.username,
+        username: data?.username,
         password: data?.password,
       }).unwrap();
 
@@ -194,4 +194,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login;

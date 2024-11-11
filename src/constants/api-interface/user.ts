@@ -1,33 +1,12 @@
-import { Designation } from "./designations";
-import { Role } from "./role";
-import { SingleEntityAttributes } from "./root";
-
 export interface User {
-  id: number;
+  _id: string;
   username: string;
+  password: string;
   email: string;
-  provider: string;
-  confirmed: boolean;
-  blocked: boolean;
+  role: "Employee" | "Admin" | "Manager";
+  status: "Pending" | "Active" | "Inactive";
   createdAt: string;
   updatedAt: string;
-  first_name: string;
-  last_name: string;
-  position_name: string;
-  address: string;
-  state: string;
-  city: string;
-  country: string;
-  date_of_birth: string;
-  phone: number;
-  zip_code: number;
-  employee_skill: any;
-  is_employee: boolean;
-  employee_certification: any;
-  work_experiences: any[];
-  designation: SingleEntityAttributes<Designation>;
-  avatar: SingleEntityAttributes<AvatarType>;
-  role: SingleEntityAttributes<Role>;
 }
 
 export interface AvatarType {
